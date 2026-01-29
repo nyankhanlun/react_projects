@@ -8,9 +8,10 @@ import { DropdownMenuDialog } from '@/components/Dropdown/DropdownDialog';
 import LyricsViewer from '@/components/Details/LyricsViewer/lyrics';
 import SongTransposer from '@/components/Details/ChordLyricsViewer/lyrics';
 import SongForm from '../song-form';
+import SheetViewer from '@/components/Details/ChordSheetViewer/sheetView';
 
 export default function SongDetailClientPage({ song }: { song: Song }){
-    const [activeMenu, setActiveMenu] = useState<'lyrics' | 'chordLyrics' | 'update'>('lyrics')
+    const [activeMenu, setActiveMenu] = useState<'lyrics' | 'chordLyrics' | 'update'| 'chord'>('lyrics')
     return (
         <>
          <div className="flex flex-col w-full gap-3">
@@ -33,8 +34,7 @@ export default function SongDetailClientPage({ song }: { song: Song }){
                     {activeMenu === 'lyrics' && <LyricsViewer song={song} />}
                     {activeMenu === 'chordLyrics' && <SongTransposer song={song} />}
                     {activeMenu === 'update' && <SongForm song={song} actionsProp="edit" />}
-                    {/* {activeMenu === 'chord' && <SheetViewer src={LyricsChordSheet} />} */}
-
+                    {activeMenu === 'chord' && <SheetViewer song={song} />}
                 </div>
         </>
     )

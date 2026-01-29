@@ -18,7 +18,7 @@ import Link from "next/link";
 
 type Props = {
   songId : any
-  onSelect: (menu: 'lyrics' | 'chordLyrics' | 'update') => void
+  onSelect: (menu: 'lyrics' | 'chordLyrics' | 'chord' | 'update') => void
 }
 
 export function DropdownMenuDialog({ onSelect, songId }: Props) {
@@ -38,7 +38,7 @@ export function DropdownMenuDialog({ onSelect, songId }: Props) {
             <DropdownMenuItem onClick={() => onSelect('lyrics')} className="hover:text-[#d8675e] hover:font-bold">
               Lyrics
             </DropdownMenuItem>
-            <DropdownMenuItem >
+            <DropdownMenuItem onClick={() => onSelect('chord')} className="hover:text-[#d8675e] hover:font-bold">
               Chord
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => onSelect('chordLyrics')} className="hover:text-[#d8675e] hover:font-bold">

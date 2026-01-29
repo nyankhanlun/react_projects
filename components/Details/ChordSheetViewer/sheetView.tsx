@@ -6,14 +6,13 @@ import {
     TransformComponent,
 } from 'react-zoom-pan-pinch';
 import classes from './sheetView.module.css'
+import { Song } from '@/app/types';
 
 interface SheetMusicViewerProps {
     src: StaticImageData | string;
 }
 
-export default function SheetViewer({
-    src,
-}: SheetMusicViewerProps) {
+export default function SheetViewer({ song }: { song: Song }) {
     return (
         <div className="relative w-full">
             <TransformWrapper
@@ -60,12 +59,12 @@ export default function SheetViewer({
                             contentClass="w-full flex justify-center items-center lg:min-h-screen"
                         >
                             <div className="flex justify-center pt-8">
-                                <Image
+                                {/* <Image
                                     src={src}
                                     alt="Sheet music"
                                     priority
                                     className="h-auto max-w-full select-none"
-                                />
+                                /> */}
                             </div>
                         </TransformComponent>
 

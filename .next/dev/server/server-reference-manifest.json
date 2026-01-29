@@ -2,6 +2,12 @@
   "node": {
     "0021c8c82d52652b239f2db1202ef9cec0f20fa10c": {
       "workers": {
+        "app/songs/[id]/edit/page": {
+          "moduleId": "[project]/.next-internal/server/app/songs/[id]/edit/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions/songs.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getSongs",
+          "filename": "app/actions/songs.ts"
+        },
         "app/songs/[id]/page": {
           "moduleId": "[project]/.next-internal/server/app/songs/[id]/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions/songs.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
@@ -16,6 +22,7 @@
         }
       },
       "layer": {
+        "app/songs/[id]/edit/page": "rsc",
         "app/songs/[id]/page": "rsc",
         "app/songs/page": "rsc"
       },
@@ -24,6 +31,12 @@
     },
     "400dd95e41600d7b87a95a4f2887382afb94218575": {
       "workers": {
+        "app/songs/[id]/edit/page": {
+          "moduleId": "[project]/.next-internal/server/app/songs/[id]/edit/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions/songs.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getSongById",
+          "filename": "app/actions/songs.ts"
+        },
         "app/songs/[id]/page": {
           "moduleId": "[project]/.next-internal/server/app/songs/[id]/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions/songs.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
@@ -38,6 +51,7 @@
         }
       },
       "layer": {
+        "app/songs/[id]/edit/page": "rsc",
         "app/songs/[id]/page": "rsc",
         "app/songs/page": "rsc"
       },
@@ -46,6 +60,12 @@
     },
     "4063187e2f2d24f7f40e3f2a326bb5f745682c7b69": {
       "workers": {
+        "app/songs/[id]/edit/page": {
+          "moduleId": "[project]/.next-internal/server/app/songs/[id]/edit/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions/songs.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "deleteSong",
+          "filename": "app/actions/songs.ts"
+        },
         "app/songs/[id]/page": {
           "moduleId": "[project]/.next-internal/server/app/songs/[id]/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions/songs.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
@@ -60,6 +80,7 @@
         }
       },
       "layer": {
+        "app/songs/[id]/edit/page": "rsc",
         "app/songs/[id]/page": "rsc",
         "app/songs/page": "rsc"
       },
@@ -68,6 +89,12 @@
     },
     "406fdd588ccc34a1c714f6046dee820546489919e2": {
       "workers": {
+        "app/songs/[id]/edit/page": {
+          "moduleId": "[project]/.next-internal/server/app/songs/[id]/edit/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions/songs.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "createSong",
+          "filename": "app/actions/songs.ts"
+        },
         "app/songs/[id]/page": {
           "moduleId": "[project]/.next-internal/server/app/songs/[id]/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions/songs.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
@@ -82,6 +109,7 @@
         }
       },
       "layer": {
+        "app/songs/[id]/edit/page": "action-browser",
         "app/songs/[id]/page": "action-browser",
         "app/songs/page": "rsc"
       },
@@ -90,6 +118,12 @@
     },
     "40c07ed79fa425d3b7332db0a0d6481442f5553dc7": {
       "workers": {
+        "app/songs/[id]/edit/page": {
+          "moduleId": "[project]/.next-internal/server/app/songs/[id]/edit/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions/songs.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "updateSong",
+          "filename": "app/actions/songs.ts"
+        },
         "app/songs/[id]/page": {
           "moduleId": "[project]/.next-internal/server/app/songs/[id]/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/actions/songs.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
@@ -104,6 +138,7 @@
         }
       },
       "layer": {
+        "app/songs/[id]/edit/page": "action-browser",
         "app/songs/[id]/page": "action-browser",
         "app/songs/page": "rsc"
       },
