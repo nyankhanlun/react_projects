@@ -1,0 +1,113 @@
+/* [project]/components/Header/header.module.css [app-client] (css) */
+.header-module__gD0orW__header {
+  padding: 1px;
+}
+
+.header-module__gD0orW__nav {
+  justify-content: flex-end;
+  gap: 16px;
+  padding-bottom: 10px;
+  display: flex;
+}
+
+.header-module__gD0orW__nav_text {
+  font-size: .7rem;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .header-module__gD0orW__header {
+    padding: 3px;
+  }
+
+  .header-module__gD0orW__nav_text {
+    font-size: .8rem;
+  }
+}
+
+/* [project]/components/Header/nav-link.module.css [app-client] (css) */
+.nav-link-module__nFUlGa__link {
+  color: #000;
+  border-radius: .5rem;
+  padding: .5rem 1rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav-link-module__nFUlGa__link:hover, .nav-link-module__nFUlGa__link:active {
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 18px #f8be2acc;
+  background: linear-gradient(90deg, #ff8a05, #f9b331);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.nav-link-module__nFUlGa__active {
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(90deg, #ff8a05, #f9b331);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* [project]/app/songs/[id]/page.module.css [app-client] (css) */
+.page-module__idv9xq__responsive_back_btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  display: flex;
+}
+
+.page-module__idv9xq__circle_arrow {
+  border: 2px solid #000;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  transition: all .2s;
+  display: flex;
+}
+
+.page-module__idv9xq__btn_text {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .page-module__idv9xq__circle_arrow {
+    width: 60px;
+    height: 60px;
+    font-size: 22px;
+  }
+
+  .page-module__idv9xq__btn_text {
+    font-size: 16px;
+  }
+
+  .page-module__idv9xq__responsive_back_btn:hover .page-module__idv9xq__circle_arrow {
+    color: #fff;
+    background-color: #000;
+  }
+}
+
+/* [project]/components/Song/card.module.css [app-client] (css) */
+.card-module__0EDabW__card {
+  border-radius: 5px;
+  transition: all .3s;
+  box-shadow: 0 4px 8px #0003;
+}
+
+.card-module__0EDabW__card:hover {
+  box-shadow: 0 8px 16px #0003;
+}
+
+.card-module__0EDabW__container {
+  padding: 15px;
+}
+
+/*# sourceMappingURL=_b18b3eb8._.css.map*/

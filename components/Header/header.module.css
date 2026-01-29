@@ -1,0 +1,27 @@
+.header {
+    padding: 1px;
+    /* position: fixed;
+  top: 0; */
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    padding-bottom: 10px;
+}
+
+.nav_text {
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+/* Tablets (≥ 768px) */
+@media (min-width: 768px) {
+    .header {
+    padding: 3px;
+}
+    .nav_text {
+        font-size: 0.8rem;
+    }
+}

@@ -1,0 +1,110 @@
+.home {
+    display: flex;
+    gap: 3rem;
+    margin: 2rem auto;
+    width: 90%;
+    max-width: 75rem;
+    min-height: 80vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgBook {
+    width: 40rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Base (mobile first) */
+.content {
+    width: 100%;
+    max-width: 45rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 2.2rem;
+    color: #1f5692;
+    font-weight: 600;
+    line-height: 1.2;
+    padding: 1.5rem 0.5rem;
+    text-align: center;
+}
+
+.customButton {
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem;
+    border-radius: 9999px;
+    width: 100%;
+    max-width: 12rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.25;
+    background-color: #fffbe0;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.customButton:hover {
+    background-color: #eab308;
+}
+
+.customButton:focus {
+    box-shadow: 0 0 0 4px rgba(234, 179, 8, 0.5);
+}
+
+/* Tablets (≥ 768px) */
+@media (min-width: 768px) {
+    .title {
+        font-size: 3.3em;
+        color: #1f5692;
+        font-weight: 600;
+        line-height: 2rem;
+        padding: 30px 10px;
+    }
+
+    .customButton {
+        box-sizing: border-box;
+        display: inline-block;
+        padding: 30px 16px;
+        margin: 30px 16px;
+        border-radius: 9999px;
+        width: 8em;
+        font-size: 2rem;
+        font-weight: 500;
+        line-height: 1.25rem;
+        background-color: #fffbe0;
+        border: 1px solid transparent;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+        transition: all 0.2s ease;
+    }
+}
+
+/* Desktops (≥ 1024px) */
+/* @media (min-width: 1024px) {
+    .title {
+        font-size: 3.5rem;
+    }
+
+    .customButton {
+        font-size: 2rem;
+        padding: 2rem 2.5rem;
+        width: 8em;
+    }
+} */

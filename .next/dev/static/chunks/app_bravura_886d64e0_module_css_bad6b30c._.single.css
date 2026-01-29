@@ -1,0 +1,25 @@
+/* [project]/app/bravura_886d64e0.module.css [app-client] (css) */
+@font-face {
+  font-family: bravura;
+  src: url("../media/Bravura-s.p.35fa9eb4.otf") format("opentype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: bravura Fallback;
+  src: local(Arial);
+  ascent-override: 201.2%;
+  descent-override: 201.2%;
+  line-gap-override: 0.0%;
+  size-adjust: 100.0%;
+}
+
+.bravura_886d64e0-module__dW4NmG__className {
+  font-family: bravura, bravura Fallback;
+}
+
+.bravura_886d64e0-module__dW4NmG__variable {
+  --font-bravura: "bravura", "bravura Fallback";
+}
+
+/*# sourceMappingURL=app_bravura_886d64e0_module_css_bad6b30c._.single.css.map*/

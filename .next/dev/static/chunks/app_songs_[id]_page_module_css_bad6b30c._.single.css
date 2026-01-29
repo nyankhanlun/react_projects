@@ -1,0 +1,47 @@
+/* [project]/app/songs/[id]/page.module.css [app-client] (css) */
+.page-module__idv9xq__responsive_back_btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  display: flex;
+}
+
+.page-module__idv9xq__circle_arrow {
+  border: 2px solid #000;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  transition: all .2s;
+  display: flex;
+}
+
+.page-module__idv9xq__btn_text {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .page-module__idv9xq__circle_arrow {
+    width: 60px;
+    height: 60px;
+    font-size: 22px;
+  }
+
+  .page-module__idv9xq__btn_text {
+    font-size: 16px;
+  }
+
+  .page-module__idv9xq__responsive_back_btn:hover .page-module__idv9xq__circle_arrow {
+    color: #fff;
+    background-color: #000;
+  }
+}
+
+/*# sourceMappingURL=app_songs_%5Bid%5D_page_module_css_bad6b30c._.single.css.map*/

@@ -1,0 +1,47 @@
+/* BASE MOBILE STYLES */
+.responsive_back_btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px; /* Larger hit area for mobile */
+}
+
+.circle_arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;  /* Mobile-friendly size */
+  height: 40px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+
+.btn_text {
+  font-size: 14px;
+}
+
+/* DESKTOP SCALING (768px and up) */
+@media (min-width: 768px) {
+  .circle_arrow {
+    width: 60px; /* Larger for desktop */
+    height: 60px;
+    font-size: 22px;
+  }
+  
+  .btn_text {
+    font-size: 16px;
+  }
+  
+  /* Hover effect (usually for mouse users on desktop) */
+  .responsive_back_btn:hover .circle_arrow {
+    background-color: #000;
+    color: #fff;
+  }
+}

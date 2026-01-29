@@ -1,0 +1,52 @@
+/* [project]/components/Header/header.module.css [app-client] (css) */
+.header-module__gD0orW__header {
+  padding: 1px;
+}
+
+.header-module__gD0orW__nav {
+  justify-content: flex-end;
+  gap: 16px;
+  padding-bottom: 10px;
+  display: flex;
+}
+
+.header-module__gD0orW__nav_text {
+  font-size: .7rem;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .header-module__gD0orW__header {
+    padding: 3px;
+  }
+
+  .header-module__gD0orW__nav_text {
+    font-size: .8rem;
+  }
+}
+
+/* [project]/components/Header/nav-link.module.css [app-client] (css) */
+.nav-link-module__nFUlGa__link {
+  color: #000;
+  border-radius: .5rem;
+  padding: .5rem 1rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav-link-module__nFUlGa__link:hover, .nav-link-module__nFUlGa__link:active {
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 18px #f8be2acc;
+  background: linear-gradient(90deg, #ff8a05, #f9b331);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.nav-link-module__nFUlGa__active {
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(90deg, #ff8a05, #f9b331);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/*# sourceMappingURL=components_Header_652677ed._.css.map*/

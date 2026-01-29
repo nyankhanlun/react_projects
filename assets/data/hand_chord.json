@@ -1,0 +1,27 @@
+{
+  "title": "ချီးမွမ်းခြင်း တန်ခိုး",
+  "key": "Am",
+  "tempo": 145,
+  "sections": [
+    {
+      "type": "intro",
+      "chords": ["II Am...", "|F ~ ~ ~", "|C _ _ _", "|C - - -", "|Am - - -", "|F - - -", "|C - - -", "C"]
+    },
+    {
+      "type": "verse",
+      "chords": ["Am", "F", "C", "C", "Am", "F", "C", "C"]
+    },
+    {
+      "type": "pre",
+      "chords": ["Am", "F", "C", "G"]
+    },
+    {
+      "type": "chorus",
+      "chords": ["C", "C", "G", "G", "Am", "Am", "F", "F"]
+    },
+    {
+      "type": "ending",
+      "notes": ["1 7 7 6 6", "5 5 4 5"]
+    }
+  ]
+}

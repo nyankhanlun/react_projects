@@ -1,0 +1,275 @@
+{
+  "title": "You Are Worthy Of It All",
+  "tempo": "78",
+  "text_sections": [
+    {
+      "type": "VERSE",
+      
+      "lyrics": [
+        "All the saints and angels",
+        "They bow before Your throne",
+        "All the elders cast their crowns",
+        "Before the Lamb of God and sing"
+      ]
+    },
+    {
+      "type": "CHORUS",
+      "lyrics": [
+        "You are worthy of it all",
+        "You are worthy of it all, Jesus",
+        "For from You are all things",
+        "And to You are all things",
+        "You deserve the glory"
+      ]
+    },
+    {
+      "type": "BRIDGE",
+      "lyrics": [
+        "Day and night, night and day",
+        "Let incense arise",
+        "Day and night, night and day",
+        "Let incense arise"
+      ]
+    }
+  ],
+  "key_sections": [
+    {
+      "transpose_keys": "Ab",
+      "intro": "Db    Ab    Eb    Ab",
+      "data": [
+        {
+          "type": "VERSE",
+          
+          "lyrics": [
+            "Db                    Eb ",
+            "All the saints and angels",
+            "Db                      Eb ",
+            "They bow before Your throne",
+            "Db                Eb            ",
+            "All the elders cast their crowns",
+            "            Db        Eb        Ab",
+            "Before the Lamb of God and sing"
+          ]
+        },
+        {
+          "type": "CHORUS",
+          "lyrics": [
+            "                     Ab",
+            "You are worthy of it all",
+            "                     Eb",
+            "You are worthy of it all, Jesus",
+            "                     Db",
+            "For from You are all things",
+            "                   Eb",
+            "And to You are all things",
+            "                 Ab",
+            "You deserve the glory"
+          ]
+        },
+        {
+          "type": "BRIDGE",
+          "lyrics": [
+            "Ab",
+            "Day and night, night and day",
+            "     Cm",
+            "Let incense arise",
+            "Fm",
+            "Day and night, night and day",
+            "     Db",
+            "Let incense arise",
+            "Ab",
+            "Day and night, night and day",
+            "     Eb",
+            "Let incense arise",
+            "Bbm",
+            "Day and night, night and day",
+            "     Db",
+            "Let incense arise"
+          ]
+        }
+      ]
+    },
+    {
+    "transpose_keys": "A",
+    "intro": "D     A     E     A",
+    "data": [
+        {
+            "type": "VERSE",
+            
+            "lyrics": [
+                "D                     E",
+                "All the saints and angels",
+                "D                       E",
+                "They bow before Your throne",
+                "D                 E",
+                "All the elders cast their crowns",
+                "            D         E         A",
+                "Before the Lamb of God and sing"
+            ]
+        },
+        {
+            "type": "CHORUS",
+            "lyrics": [
+                "                     A",
+                "You are worthy of it all",
+                "                     E",
+                "You are worthy of it all, Jesus",
+                "                     D",
+                "For from You are all things",
+                "                   E",
+                "And to You are all things",
+                "                 A",
+                "You deserve the glory"
+            ]
+        },
+        {
+            "type": "BRIDGE",
+            "lyrics": [
+                "A",
+                "Day and night, night and day",
+                "     C#m",
+                "Let incense arise",
+                "F#m",
+                "Day and night, night and day",
+                "     D",
+                "Let incense arise",
+                "A",
+                "Day and night, night and day",
+                "     E",
+                "Let incense arise",
+                "Bm",
+                "Day and night, night and day",
+                "     D",
+                "Let incense arise"
+            ]
+        }
+    ]
+},
+    {
+    "transpose_keys": "A#",
+    "intro": "D#      A#      F     A#",
+    "data": [
+        {
+            "type": "VERSE",
+            
+            "lyrics": [
+                "D#                      F",
+                "All the saints and angels",
+                "D#                        F",
+                "They bow before Your throne",
+                "D#                  F",
+                "All the elders cast their crowns",
+                "            D#          F         A#",
+                "Before the Lamb of God and sing"
+            ]
+        },
+        {
+            "type": "CHORUS",
+            "lyrics": [
+                "                     A#",
+                "You are worthy of it all",
+                "                     F",
+                "You are worthy of it all, Jesus",
+                "                     D#",
+                "For from You are all things",
+                "                   F",
+                "And to You are all things",
+                "                 A#",
+                "You deserve the glory"
+            ]
+        },
+        {
+            "type": "BRIDGE",
+            "lyrics": [
+                "A#",
+                "Day and night, night and day",
+                "     Dm",
+                "Let incense arise",
+                "Gm",
+                "Day and night, night and day",
+                "     D#",
+                "Let incense arise",
+                "A#",
+                "Day and night, night and day",
+                "     F",
+                "Let incense arise",
+                "Cm",
+                "Day and night, night and day",
+                "     D#",
+                "Let incense arise"
+            ]
+        }
+    ]
+},
+    {
+      "transpose_keys": "Bb",
+      "intro": "",
+      "data": []
+    },
+    {
+      "transpose_keys": "B",
+      "intro": "",
+      "data": []
+    },
+    {
+      "transpose_keys": "C",
+      "intro": "",
+      "data": []
+    },
+    {
+      "transpose_keys": "C#",
+      "intro": "",
+      "data": []
+    },
+    {
+      "transpose_keys": "Db",
+      "intro": "",
+      "data": []
+    },
+    {
+      "transpose_keys": "D",
+      "intro": "",
+      "data": []
+    },
+    {
+      "transpose_keys": "D#",
+      "intro": "",
+      "data": []
+    },
+    {
+      "transpose_keys": "Eb",
+      "intro": "",
+      "data": []
+    },
+    {
+      "transpose_keys": "E",
+      "intro": "",
+      "data": []
+    },
+    {
+      "transpose_keys": "F",
+      "intro": "",
+      "data": []
+    },
+    {
+      "transpose_keys": "F#",
+      "intro": "",
+      "data": []
+    },
+    {
+      "transpose_keys": "Gb",
+      "intro": "",
+      "data": []
+    },
+    {
+      "transpose_keys": "G",
+      "intro": "",
+      "data": []
+    },
+    {
+      "transpose_keys": "G#",
+      "intro": "",
+      "data": []
+    }
+  ]
+}
