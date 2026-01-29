@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/components/Header/header.module.css"],"sourcesContent":[".header {\n    padding: 1px;\n    /* position: fixed;\n  top: 0; */\n}\n\n.nav {\n    display: flex;\n    justify-content: flex-end;\n    gap: 16px;\n    padding-bottom: 10px;\n}\n\n.nav_text {\n    font-size: 0.7rem;\n    font-weight: 600;\n}\n\n/* Tablets (≥ 768px) */\n@media (min-width: 768px) {\n    .header {\n    padding: 3px;\n}\n    .nav_text {\n        font-size: 0.8rem;\n    }\n}"],"names":[],"mappings":"AAAA;;;;AAMA;;;;;;;AAOA;;;;;AAMA;EACI;;;;EAGA"}}]
-}

@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/app/songs/[id]/page.module.css"],"sourcesContent":["/* BASE MOBILE STYLES */\n.responsive_back_btn {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  background: transparent;\n  border: none;\n  font-family: inherit;\n  font-weight: 600;\n  cursor: pointer;\n  padding: 8px; /* Larger hit area for mobile */\n}\n\n.circle_arrow {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 40px;  /* Mobile-friendly size */\n  height: 40px;\n  border: 2px solid #000;\n  border-radius: 50%;\n  font-size: 18px;\n  transition: all 0.2s ease;\n}\n\n.btn_text {\n  font-size: 14px;\n}\n\n/* DESKTOP SCALING (768px and up) */\n@media (min-width: 768px) {\n  .circle_arrow {\n    width: 60px; /* Larger for desktop */\n    height: 60px;\n    font-size: 22px;\n  }\n  \n  .btn_text {\n    font-size: 16px;\n  }\n  \n  /* Hover effect (usually for mouse users on desktop) */\n  .responsive_back_btn:hover .circle_arrow {\n    background-color: #000;\n    color: #fff;\n  }\n}\n"],"names":[],"mappings":"AACA;;;;;;;;;;;;AAYA;;;;;;;;;;;;AAYA;;;;AAKA;EACE;;;;;;EAMA;;;;EAKA"}}]
-}

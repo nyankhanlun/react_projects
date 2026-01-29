@@ -1,8 +1,0 @@
-[00:00:00.977] Server  LOG     ✓ Ready in 669ms
-[00:00:13.034] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:13.157] Browser WARN    Image with src "/_next/static/media/book.90c0e699.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
-Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
-[00:00:13.157] Browser WARN    Image with src "/_next/static/media/book.90c0e699.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:01:48.125] Server  LOG     ✓ Compiled in 365ms
-[00:06:01.759] Server  LOG     ✓ Compiled in 157ms
-[00:06:08.516] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
