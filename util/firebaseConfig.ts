@@ -2,7 +2,9 @@ import { initializeApp } from "firebase/app";
 import * as admin from 'firebase-admin';
 import { getFirestore } from 'firebase-admin/firestore';
 
-const serviceAccount = require('./serviceAccountKey.json');
+const serviceAccount = JSON.parse(
+  Buffer.from(process.env.NEXT_SERVICE_ACC!, 'base64').toString('utf8')
+)
 
 if (!admin.apps.length) {
   admin.initializeApp({

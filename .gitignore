@@ -14,7 +14,7 @@
 /out/
 
 # firebase config
-# serviceAccountKey.json
+util/serviceAccountKey.json
 
 # production
 /build
