@@ -6,6 +6,8 @@ import path from 'path';
 import { Song } from '../types';
 import { adminDb } from './../../util/firebaseConfig'
 import * as admin from 'firebase-admin';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 export async function getSongsCollectoin() {
   const collectionRef = adminDb.collection('songlist');
@@ -34,16 +36,22 @@ export async function updateSong(songId: string, data: Song) {
 }
 
 export async function createSong(song: Song) {
+  // const collectionRef = adminDb.collection('songlist');
+  //  const docRef = await collectionRef.doc(song?.id).set({
+  //     ...song,
+  //   });
+
+  //   console.log("Document written with ID: ", docRef);
+    //  revalidatePath('/songs');
+    //   redirect('/songs');
   try {
   const collectionRef = adminDb.collection('songlist');
    const docRef = await collectionRef.doc(song?.id).set({
       ...song,
-      // createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      // updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 
-    // console.log("Document written with ID: ", docRef);
-    return { success: true };
+      revalidatePath('/songs');
+      redirect('/songs');
   } catch (error) {
     console.error("Error adding document: ", error);
     return { success: false, error };
