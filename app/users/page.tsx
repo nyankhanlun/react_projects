@@ -37,7 +37,7 @@ export default async function UsersPage() {
 
       {/* User list */}
       <ul>
-        {users.map(user => (
+        {users.map((user : any) => (
           <li key={user.id}>
             <Link href={`/users/${user.id}`}>
               {user.name} ({user.email})

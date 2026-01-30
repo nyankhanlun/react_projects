@@ -34,7 +34,7 @@ V1    D#
             value={toKey}
             onChange={(e) => setToKey(e.target.value)}
           >
-            {NOTES.map(k => (
+            {NOTES.map((k : any) => (
               <option key={k} value={k}>{k}</option>
             ))}
           </select>

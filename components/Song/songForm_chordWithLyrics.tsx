@@ -29,11 +29,11 @@ export default function SongForm_chordWithLyrics({ song, onSubmit, children }: S
     useEffect(() => {
         if (song?.key_sections?.length) {
             setChordwithlyricssections(
-                song.key_sections.map((ks) => ({
+                song.key_sections.map((ks : any) => ({
                     key: ks.key ?? "C",
                     music: ks.music ?? "",
                     chordLyricssection:
-                        ks.chordLyricssection?.map((s) => ({
+                        ks.chordLyricssection?.map((s : any) => ({
                             label: s.label ?? "",
                             content: s.content ?? "",
                         })) ?? [{ label: "", content: "" }],
@@ -54,7 +54,7 @@ export default function SongForm_chordWithLyrics({ song, onSubmit, children }: S
 
     const addSection = (chordIndex: number) => {
         setChordwithlyricssections(prev =>
-            prev.map((c, i) =>
+            prev.map((c : any, i  : any) =>
                 i === chordIndex
                     ? {
                         ...c,
@@ -75,11 +75,11 @@ export default function SongForm_chordWithLyrics({ song, onSubmit, children }: S
         value: string
     ) => {
         setChordwithlyricssections(prev =>
-            prev.map((c, i) =>
+            prev.map((c : any, i  : any) =>
                 i === chordIndex
                     ? {
                         ...c,
-                        chordLyricssection: c.chordLyricssection.map((s, j) =>
+                        chordLyricssection: c.chordLyricssection.map((s  : any, j : any) =>
                             j === sectionIndex ? { ...s, [field]: value } : s
                         ),
                     }
@@ -90,14 +90,14 @@ export default function SongForm_chordWithLyrics({ song, onSubmit, children }: S
 
     const removeSection = (chordIndex: number, sectionIndex: number) => {
         setChordwithlyricssections(prev =>
-            prev.map((c, i) =>
+            prev.map((c : any, i  : any) =>
                 i === chordIndex
                     ? {
                         ...c,
                         chordLyricssection:
                             c.chordLyricssection.length === 1
                                 ? c.chordLyricssection
-                                : c.chordLyricssection.filter((_, j) => j !== sectionIndex),
+                                : c.chordLyricssection.filter((_ : any, j : any) => j !== sectionIndex),
                     }
                     : c
             )
@@ -124,7 +124,7 @@ export default function SongForm_chordWithLyrics({ song, onSubmit, children }: S
     return (
         <>
             <form id="lyrics-form" onSubmit={handleSubmit} >
-                {chordwithlyricssections.map((chordsection, chordindex) => (
+                {chordwithlyricssections.map((chordsection : any, chordindex : any) => (
                     <div key={chordindex} className={`${cardClasses.card} bg-[#F6CE71] my-5`}>
                         <div className={cardClasses.container}>
 
@@ -138,14 +138,14 @@ export default function SongForm_chordWithLyrics({ song, onSubmit, children }: S
                                         value={chordsection.key}
                                         onChange={(e) =>
                                             setChordwithlyricssections(prev =>
-                                                prev.map((c, i) =>
+                                                prev.map((c : any, i  : any) =>
                                                     i === chordindex ? { ...c, key: e.target.value } : c
                                                 )
                                             )
                                         }
                                     >
 
-                                        {NOTES.map(k => (
+                                        {NOTES.map((k : any) => (
                                             <option key={k} value={k}>{k}</option>
                                         ))}
                                     </select>
@@ -160,7 +160,7 @@ export default function SongForm_chordWithLyrics({ song, onSubmit, children }: S
                                         value={chordsection.music}
                                         onChange={(e) =>
                                             setChordwithlyricssections(prev =>
-                                                prev.map((c, i) =>
+                                                prev.map((c : any, i: any) =>
                                                     i === chordindex ? { ...c, music: e.target.value } : c
                                                 )
                                             )
@@ -170,7 +170,7 @@ export default function SongForm_chordWithLyrics({ song, onSubmit, children }: S
                                 </div>
                             </div>
                             <div className="space-y-6 mt-3">
-                                {chordsection.chordLyricssection.map((section, index) => (
+                                {chordsection.chordLyricssection.map((section : any, index: any) => (
                                     <div
                                         key={index}
                                         className="bg-[#F6F6F6] border p-4 rounded space-y-4"
@@ -187,7 +187,7 @@ export default function SongForm_chordWithLyrics({ song, onSubmit, children }: S
                                                     className="h-14 px-4 text-lg border rounded bg-white focus:ring-2 focus:ring-blue-500"
                                                 >
                                                     <option value="">Select label</option>
-                                                    {LABEL.map((k) => (
+                                                    {LABEL.map((k : any) => (
                                                         <option key={k} value={k}>
                                                             {k}
                                                         </option>

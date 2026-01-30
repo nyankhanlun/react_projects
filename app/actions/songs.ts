@@ -10,7 +10,7 @@ import * as admin from 'firebase-admin';
 export async function getSongsCollectoin() {
   const collectionRef = adminDb.collection('songlist');
   const snapshot = await collectionRef.get();
-  const allSongs = snapshot.docs.map(doc => ({
+  const allSongs = snapshot.docs.map((doc : any) => ({
     id: doc.id,
     ...doc.data()
   }));

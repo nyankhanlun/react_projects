@@ -23,7 +23,7 @@ export default function SongForm_Lyrics({ song, onSubmit, children }: SongFormPr
     useEffect(() => {
         if (song?.text_sections?.length) {
             setSections(
-                song.text_sections.map((s) => ({
+                song.text_sections.map((s : any) => ({
                     label: s.label ?? "",
                     content: s.content ?? "",
                 }))
@@ -63,7 +63,7 @@ export default function SongForm_Lyrics({ song, onSubmit, children }: SongFormPr
         value: string
     ): void => {
         setSections((prev) =>
-            prev.map((section, i) =>
+            prev.map((section : any, i : any) =>
                 i === index ? { ...section, [field]: value } : section
             )
         );
@@ -86,7 +86,7 @@ export default function SongForm_Lyrics({ song, onSubmit, children }: SongFormPr
             <form id="lyrics-form" onSubmit={handleSubmit}>
                 <div className="space-y-6">
 
-                    {sections.map((section, index) => (
+                    {sections.map((section : any, index : any) => (
                         <div
                             key={index}
                             className="bg-[#F6F6F6] border p-4 rounded space-y-4"
@@ -103,7 +103,7 @@ export default function SongForm_Lyrics({ song, onSubmit, children }: SongFormPr
                                         className="h-14 px-4 text-lg border rounded bg-white focus:ring-2 focus:ring-blue-500"
                                     >
                                         <option value="">Select label</option>
-                                        {LABEL.map((k) => (
+                                        {LABEL.map((k : any) => (
                                             <option key={k} value={k}>
                                                 {k}
                                             </option>

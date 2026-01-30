@@ -56,7 +56,7 @@ export default function SongsList({ list }: { list: any[] }) {
 
       <div className="flex flex-col w-full pt-10">
         <ol className="list-decimal list-inside space-y-2 text-gray-800">
-          {filteredSongs.map((song) => (
+          {filteredSongs.map((song : any) => (
             <li key={song.id} className="hover:text-[#d8675e]">
               <Link href={`/songs/${song.id}`}>{song.title}</Link>
             </li>
