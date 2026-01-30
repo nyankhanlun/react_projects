@@ -31,6 +31,8 @@ export type Song = {
   bpm?: string;
   key_sections?: KeySection[] | any;
   text_sections?: TextSection[] | any;
+  createdAt?: any;
+  updatedAt?: any;
 };
 
 

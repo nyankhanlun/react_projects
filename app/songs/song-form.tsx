@@ -68,7 +68,9 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
               ...song,
               title: title,
               composer: composer,
-              text_sections: data
+              text_sections: data,
+              createdAt: song?.createdAt,
+              updatedAt: Date.now()
             }
             await updateSong(song.id, obj);
           } else {
@@ -85,13 +87,14 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
           id: dateSt.toString(),
           title: title,
           composer: composer,
-          text_sections: data
+          text_sections: data,
+          createdAt: Date.now(),
+          updatedAt: Date.now()
         }
         await createSong(obj);
       }
 
       router.push('/songs');
-      // router.refresh()
     } catch (err: any) {
       setTimeout(() => setError(err.message || 'Something went wrong'), 3000);
     } finally {
@@ -111,7 +114,9 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
             composer: composer,
             timeSignature: timeSignature,
             bpm: bpm,
-            key_sections: data
+            key_sections: data,
+            createdAt: song?.createdAt,
+            updatedAt: Date.now()
           }
           await updateSong(song.id, obj);
         } else {
@@ -125,12 +130,13 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
           composer: composer,
           timeSignature: timeSignature,
           bpm: bpm,
-          key_sections: data
+          key_sections: data,
+          createdAt: Date.now(),
+          updatedAt: Date.now()
         }
         await createSong(obj);
       }
       router.push('/songs');
-      // router.refresh()
     } catch (err: any) {
       setTimeout(() => setError(err.message || 'Something went wrong'), 3000);
     } finally {

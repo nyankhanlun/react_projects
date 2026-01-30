@@ -32,22 +32,17 @@ export async function songById(songId: string): Promise<Song | null> {
 
 export async function updateSong(songId: string, data: Song) {
   const docRef = adminDb.collection('songlist').doc(songId);
-  await docRef.set(data, { merge: true });
+  const payload = {
+      ...data,
+  }
+  await docRef.set(payload, { merge: true });
 }
 
 export async function createSong(song: Song) {
-  // const collectionRef = adminDb.collection('songlist');
-  //  const docRef = await collectionRef.doc(song?.id).set({
-  //     ...song,
-  //   });
-
-  //   console.log("Document written with ID: ", docRef);
-    //  revalidatePath('/songs');
-    //   redirect('/songs');
   try {
   const collectionRef = adminDb.collection('songlist');
    const docRef = await collectionRef.doc(song?.id).set({
-      ...song,
+      ...song
     });
       revalidatePath('/songs');
       redirect('/songs');
