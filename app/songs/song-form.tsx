@@ -91,7 +91,7 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
       }
 
       router.push('/songs');
-      router.refresh()
+      // router.refresh()
     } catch (err: any) {
       setTimeout(() => setError(err.message || 'Something went wrong'), 3000);
     } finally {
@@ -130,7 +130,7 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
         await createSong(obj);
       }
       router.push('/songs');
-      router.refresh()
+      // router.refresh()
     } catch (err: any) {
       setTimeout(() => setError(err.message || 'Something went wrong'), 3000);
     } finally {
