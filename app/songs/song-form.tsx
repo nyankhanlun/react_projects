@@ -63,22 +63,26 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
 
       if (actionsProp === 'edit') {
         try {
-          const obj = {
-            ...song,
-            id: song?.id,
-            title: title,
-            composer: composer,
-            text_sections: data
+          if (song?.id) {
+            const obj = {
+              ...song,
+              title: title,
+              composer: composer,
+              text_sections: data
+            }
+            await updateSong(song.id, obj);
+          } else {
+            console.error("Cannot update song: Missing ID");
           }
-          await updateSong(obj);
         } catch (err: any) {
           setTimeout(() => setError(err.message || 'Something went wrong'), 3000);
         } finally {
           setLoading(false);
         }
       } else {
+        const dateSt = Date.now()
         const obj = {
-          id: Date.now(),
+          id: dateSt.toString(),
           title: title,
           composer: composer,
           text_sections: data
@@ -99,19 +103,23 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
 
     try {
       if (actionsProp === 'edit') {
-        const obj = {
-          ...song,
-          id: song?.id,
-          title: title,
-          composer: composer,
-          timeSignature: timeSignature,
-          bpm: bpm,
-          key_sections: data
+        if (song?.id) {
+          const obj = {
+            ...song,
+            title: title,
+            composer: composer,
+            timeSignature: timeSignature,
+            bpm: bpm,
+            key_sections: data
+          }
+          await updateSong(song.id, obj);
+        } else {
+          console.error("Cannot update chord with lryics song: Missing ID");
         }
-        await updateSong(obj);
       } else {
+        const dateStr = Date.now()
         const obj = {
-          id: Date.now(),
+          id: dateStr.toString(),
           title: title,
           composer: composer,
           timeSignature: timeSignature,
@@ -204,7 +212,7 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
                 </div>
               )}
               <div className="flex flex-col  mt-5  sm:flex-row gap-3 justify-end">
-                <Link href={actionsProp === 'edit' ? `/songs/${song?.id}`: `/songs`} className="w-full sm:w-auto">
+                <Link href={actionsProp === 'edit' ? `/songs/${song?.id}` : `/songs`} className="w-full sm:w-auto">
                   <button
                     className="w-full sm:w-auto px-4 py-2 border rounded text-gray-700 bg-[#E6E6E6] hover:bg-gray-100"
                   >
@@ -260,7 +268,7 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
                 )}
 
                 <div className="flex flex-col sm:flex-row gap-3 justify-end">
-                  <Link href={actionsProp === 'edit' ? `/songs/${song?.id}`: `/songs`} className="w-full sm:w-auto">
+                  <Link href={actionsProp === 'edit' ? `/songs/${song?.id}` : `/songs`} className="w-full sm:w-auto">
                     <button
                       className="w-full sm:w-auto px-4 py-2 border rounded text-gray-700 bg-[#E6E6E6] hover:bg-gray-100"
                     >

@@ -22,15 +22,15 @@ export type TextSection = {
 };
 
 export type Song = {
-  id: number;
+  id: string;
   mode?: string;
   actions?: string;
   title: string;
   composer: string;
   timeSignature?: string;
   bpm?: string;
-  key_sections?: KeySection[];
-  text_sections?: TextSection[];
+  key_sections?: KeySection[] | any;
+  text_sections?: TextSection[] | any;
 };
 
 

@@ -13,6 +13,9 @@
 /.next/
 /out/
 
+# firebase config
+serviceAccountKey.json
+
 # production
 /build
 

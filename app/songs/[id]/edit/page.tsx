@@ -1,4 +1,4 @@
-import { getSongById } from "@/app/actions/songs";
+import { songById } from "@/app/actions/songs";
 import { notFound } from "next/navigation";
 import SongForm from "../../song-form";
 
@@ -8,13 +8,12 @@ type Props = {
 
 export default async function EditSongForm({ params }: Props) {
     const { id } = await params;
-    const songId = Number(id);
-    const song = await getSongById(songId);
+    const song = await songById(id);
     if (!song) notFound();
 
     return (
         <>
-            <SongForm song={song} actionsProp="edit"  />
+            <SongForm song={song} actionsProp="edit" />
         </>
     )
 }
