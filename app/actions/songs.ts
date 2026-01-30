@@ -50,8 +50,8 @@ export async function createSong(song: Song) {
       ...song,
     });
 
-      revalidatePath('/songs');
-      redirect('/songs');
+      // revalidatePath('/songs');
+      // redirect('/songs');
   } catch (error) {
     console.error("Error adding document: ", error);
     return { success: false, error };
