@@ -3,7 +3,7 @@
   color: #000000;
   font-weight: bold;
   padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  /* border-radius: 0.5rem; */
 }
 
 .link:hover,

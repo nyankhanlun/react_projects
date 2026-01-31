@@ -21,9 +21,9 @@ export default function Home() {
               <p>
                 <Link href="/songs"><button type="button" className={classes.customButton}>All Songs</button></Link>
               </p>
-              <p>
+              {/* <p>
                 <Link href="/artist"><button type="button" className={classes.customButton}>Artist</button></Link>
-              </p>
+              </p> */}
             </div>
           </div>
         </main>
