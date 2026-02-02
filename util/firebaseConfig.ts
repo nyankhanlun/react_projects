@@ -13,16 +13,9 @@ if (!admin.apps.length) {
   });
 }
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCaoKkIQhbiqc1EaXbnzBtHJtxvfj1jYzA",
-  authDomain: "chordbank-pck.firebaseapp.com",
-  projectId: "chordbank-pck",
-  storageBucket: "chordbank-pck.firebasestorage.app",
-  messagingSenderId: "1031370931566",
-  appId: "1:1031370931566:web:24f418de40a1205d70557f",
-  measurementId: "G-92W2K8SH42"
-};
-
+const firebaseConfig = JSON.parse(
+  Buffer.from(process.env.NEXT_FIREBASE_CONFIG!, 'base64').toString('utf8')
+)
 const app = initializeApp(firebaseConfig);
 const adminDb = getFirestore('songs');
 

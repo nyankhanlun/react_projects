@@ -1,12 +1,30 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import NavLink from './NavLink';
 
 export default function Header() {
     const [open, setOpen] = useState(false);
+
+    const menuRef = useRef<HTMLDivElement | null>(null);
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+                setOpen(false);
+            }
+        };
+
+        if (open) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [open]);
+
 
     return (
         <header className="w-full">
@@ -38,7 +56,9 @@ export default function Header() {
             </div>
 
             {open && (
-                <div className="md:hidden absolute right-5 top-18 z-50 w-60 rounded-md bg-white dark:bg-gray-900 shadow-xl border-gray-800 dark:border-gray-800">
+                <div
+                    ref={menuRef}
+                    className="md:hidden absolute right-5 top-18 z-50 w-60 rounded-md bg-white dark:bg-gray-900 shadow-xl border-gray-800 dark:border-gray-800">
                     <nav className="flex flex-col divide-y dark:divide-gray-700">
                         <NavLink href="/songs">
                             All Songs
