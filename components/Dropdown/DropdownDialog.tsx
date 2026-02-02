@@ -38,9 +38,9 @@ export function DropdownMenuDialog({ onSelect, songId }: Props) {
             <DropdownMenuItem onClick={() => onSelect('lyrics')} className="hover:text-[#d8675e] hover:font-bold">
               Lyrics
             </DropdownMenuItem>
-            {/* <DropdownMenuItem onClick={() => onSelect('chord')} className="hover:text-[#d8675e] hover:font-bold">
+            <DropdownMenuItem onClick={() => onSelect('chord')} className="hover:text-[#d8675e] hover:font-bold">
               Chord
-            </DropdownMenuItem> */}
+            </DropdownMenuItem>
             <DropdownMenuItem onClick={() => onSelect('chordLyrics')} className="hover:text-[#d8675e] hover:font-bold">
               Lyrics & Chord
             </DropdownMenuItem>

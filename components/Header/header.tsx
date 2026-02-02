@@ -30,7 +30,7 @@ export default function Header() {
         <header className="w-full">
             <div className="mx-auto max-w-7xl flex items-center justify-between py-3">
                 {/* Logo */}
-                <Link href="" className="text-xl font-bold text-blue-600 dark:text-white">
+                <Link href="" className="text-xl font-bold text-blue-600">
                     {/* ChordBank */}
                 </Link>
 
@@ -48,7 +48,7 @@ export default function Header() {
 
                 <button
                     onClick={() => setOpen(!open)}
-                    className="md:hidden p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800"
+                    className="md:hidden p-2 rounded-lg hover:bg-gray-200"
                     aria-label="Toggle menu"
                 >
                     <HamburgerMenuIcon className="w-7 h-7 font-bold" />
@@ -58,8 +58,8 @@ export default function Header() {
             {open && (
                 <div
                     ref={menuRef}
-                    className="md:hidden absolute right-5 top-18 z-50 w-60 rounded-md bg-white dark:bg-gray-900 shadow-xl border-gray-800 dark:border-gray-800">
-                    <nav className="flex flex-col divide-y dark:divide-gray-700">
+                    className="md:hidden absolute right-5 top-18 z-50 w-60 rounded-md bg-white shadow-xl border-gray-800 ">
+                    <nav className="flex flex-col divide-y ">
                         <NavLink href="/songs">
                             All Songs
                         </NavLink>
