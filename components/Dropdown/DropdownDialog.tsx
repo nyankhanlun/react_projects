@@ -12,44 +12,65 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 import {
-    TriangleDownIcon
+  TriangleDownIcon
 } from "@radix-ui/react-icons";
 import Link from "next/link";
+import { useState } from "react";
+
+type MenuType = 'lyrics' | 'chordLyrics' | 'chord' | 'update'
 
 type Props = {
-  songId : any
-  onSelect: (menu: 'lyrics' | 'chordLyrics' | 'chord' | 'update') => void
+  songId: any
+  onSelect: (menu: MenuType) => void
 }
 
 export function DropdownMenuDialog({ onSelect, songId }: Props) {
+  const [selected, setSelected] = useState<MenuType>("lyrics")
+  const [loading, setLoading] = useState(false)
+
+  const handleSelect = (menu: MenuType) => {
+    setSelected(menu)
+    onSelect(menu)
+  }
+
+
   return (
     <>
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
           <Button className="bg-white" size="responsive" variant="outline" aria-label="Open menu">
-            Choose Options  
+            {selected === 'lyrics' && "Lyrics"}
+            {selected === 'chordLyrics' && "Lyrics and Chord"}
+            {selected === 'chord' && "Chord"}
             <TriangleDownIcon />
-            </Button>
+          </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-40 md:w-47 lg:w-44 bg-white border-slate-100" align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-           <DropdownMenuSeparator />
+          <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem onClick={() => onSelect('lyrics')} className="hover:text-[#d8675e] hover:font-bold">
+            <DropdownMenuItem onClick={() => handleSelect("lyrics")} className="hover:text-[#d8675e] hover:font-bold">
               Lyrics
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => onSelect('chord')} className="hover:text-[#d8675e] hover:font-bold">
+            <DropdownMenuItem onClick={() => handleSelect('chord')} className="hover:text-[#d8675e] hover:font-bold">
               Chord
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => onSelect('chordLyrics')} className="hover:text-[#d8675e] hover:font-bold">
+            <DropdownMenuItem onClick={() => handleSelect('chordLyrics')} className="hover:text-[#d8675e] hover:font-bold">
               Lyrics & Chord
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => onSelect('update')}>
+            {/* <DropdownMenuItem onClick={() => handleSelect('update')}>
               <Link href={`/songs/${songId}/edit`} className="text-[#ff8a05] font-bold">
-              
-              Edit Song
+
+                Edit Song
               </Link>
-              
+
+            </DropdownMenuItem> */}
+            <DropdownMenuItem
+              onClick={() => setLoading(true)}
+            >
+              <Link href={`/songs/${songId}/edit`}>
+                {loading ? 'Opening...' : 'Edit Song'}
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>
         </DropdownMenuContent>
