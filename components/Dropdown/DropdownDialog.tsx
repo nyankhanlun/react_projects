@@ -58,17 +58,11 @@ export function DropdownMenuDialog({ onSelect, songId }: Props) {
             <DropdownMenuItem onClick={() => handleSelect('chordLyrics')} className="hover:text-[#d8675e] hover:font-bold">
               Lyrics & Chord
             </DropdownMenuItem>
-            {/* <DropdownMenuItem onClick={() => handleSelect('update')}>
-              <Link href={`/songs/${songId}/edit`} className="text-[#ff8a05] font-bold">
-
-                Edit Song
-              </Link>
-
-            </DropdownMenuItem> */}
+            
             <DropdownMenuItem
               onClick={() => setLoading(true)}
             >
-              <Link href={`/songs/${songId}/edit`}>
+              <Link href={`/songs/${songId}/edit`} className="text-[#ff8a05] font-bold">
                 {loading ? 'Opening...' : 'Edit Song'}
               </Link>
             </DropdownMenuItem>

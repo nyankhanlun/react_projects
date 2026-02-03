@@ -175,6 +175,11 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
               </select>
             </div>
           </div>
+          {!mode && (
+            <p className="text-sm text-gray-500 mt-2">
+              Please choose one option to start updating the song.
+            </p>
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex flex-col w-full">
@@ -189,6 +194,7 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
                 id="title"
                 type="text"
                 name="title"
+                disabled={!mode}
                 className="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -204,6 +210,7 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
                 id="composer"
                 type="text"
                 name="composer"
+                disabled={!mode}
                 className="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
