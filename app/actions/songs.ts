@@ -8,6 +8,7 @@ import { adminDb } from './../../util/firebaseConfig'
 import * as admin from 'firebase-admin';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { deleteDoc } from 'firebase/firestore';
 
 export async function getSongsCollectoin() {
   const collectionRef = adminDb.collection('songlist');
@@ -50,6 +51,12 @@ export async function createSong(song: Song) {
     console.error("Error adding document: ", error);
     return { success: false, error };
   }
+}
+
+export async function deleteSongById(songId: string) {
+await adminDb.collection('songlist').doc(songId.toString()).delete();
+revalidatePath('/songs');
+redirect('/songs');
 }
 
 const filePath = path.join(process.cwd(), 'data/songs.json');

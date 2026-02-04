@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import classes from './page.module.css'
 import { DoubleArrowLeftIcon } from '@radix-ui/react-icons'
-import { Suspense, useState } from 'react';
+import {  useState } from 'react';
 import { Song } from '@/app/types';
 import { DropdownMenuDialog } from '@/components/Dropdown/DropdownDialog';
 import LyricsViewer from '@/components/Details/LyricsViewer/lyrics';
@@ -10,13 +10,15 @@ import SongTransposer from '@/components/Details/ChordLyricsViewer/lyrics';
 import SheetViewer from '@/components/Details/ChordSheetViewer/sheetView';
 import dynamic from 'next/dynamic'
 
+
 const SongForm = dynamic(() => import('../song-form'), {
-  loading: () => <p>Loading form...</p>, // or your spinner component
-  ssr: false, // optional but recommended if the form is client-only
+    loading: () => <p>Loading form...</p>, // or your spinner component
+    ssr: false, // optional but recommended if the form is client-only
 })
 
 export default function SongDetailClientPage({ song }: { song: Song }) {
-    const [activeMenu, setActiveMenu] = useState<'lyrics' | 'chordLyrics' | 'update' | 'chord'>('lyrics')
+    const [activeMenu, setActiveMenu] = useState<'lyrics' | 'chordLyrics' | 'update' | 'chord' | 'delete'>('lyrics')
+
     return (
         <>
             <div className="flex flex-col w-full gap-3">
@@ -31,7 +33,6 @@ export default function SongDetailClientPage({ song }: { song: Song }) {
                             <span className={classes.btn_text}>Back</span>
                         </button>
                     </Link>
-
                     <div className="ml-auto">
                         <DropdownMenuDialog onSelect={setActiveMenu} songId={song?.id} />
                     </div>
@@ -39,7 +40,6 @@ export default function SongDetailClientPage({ song }: { song: Song }) {
                 {activeMenu === 'lyrics' && <LyricsViewer song={song} />}
                 {activeMenu === 'chordLyrics' && <SongTransposer song={song} />}
                 {activeMenu === 'chord' && <SheetViewer song={song} />}
-                {activeMenu === 'update' && <SongForm song={song} actionsProp="edit" />}
             </div>
         </>
     )

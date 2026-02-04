@@ -11,13 +11,14 @@ import { useRouter } from 'next/navigation';
 import SongForm_chordWithLyrics from '@/components/Song/songForm_chordWithLyrics';
 import { DoubleArrowLeftIcon } from '@radix-ui/react-icons';
 import classes from '@/app/songs/[id]/page.module.css'
+import SongForm_Chord from '@/components/Song/songForm_chord';
 
 type SongFormProps = {
   song?: Song;
   actionsProp: "edit" | "create";
 };
 
-type SongMode = 'Lyrics' | 'ChordWithLyrics';
+type SongMode = 'Lyrics' | 'ChordWithLyrics' | 'Chord';
 
 
 export default function SongForm({ song, actionsProp }: SongFormProps) {
@@ -26,7 +27,7 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState<SongMode>();
   const isSongMode = (value: string): value is SongMode =>
-    value === 'Lyrics' || value === 'ChordWithLyrics';
+    value === 'Lyrics' || value === 'ChordWithLyrics' || value === 'Chord';
 
   const handleModeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
@@ -171,7 +172,8 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
               >
                 <option >Choose Options</option>
                 <option value="Lyrics">Lyrics Only</option>
-                <option value="ChordWithLyrics">Chord With Lyrics</option>
+                <option value="ChordWithLyrics">Lyrics & Chord</option>
+                <option value="Chord">Chord Sheet Only</option>
               </select>
             </div>
           </div>
@@ -195,6 +197,7 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
                 type="text"
                 name="title"
                 disabled={!mode}
+                required
                 className="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -236,20 +239,25 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
                 </Link>
 
                 {actionsProp === 'edit' ?
-                  <button disabled={loading}
-                    className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                  >
-                    {loading ? 'Saving...' : 'Save'}
-                  </button>
+                  <>
+                  {title !== '' && <button disabled={loading}
+                      className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                    >
+                      {loading ? 'Saving...' : 'Save'}
+                    </button> 
+                    }
+                    </>
                   :
-                  <button disabled={loading}
-                    className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                  >
-                    {loading ? 'Adding...' : 'Add'}
-                  </button>
+                  <>
+                 
+                  {title !== '' && <button disabled={loading}
+                      className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                    >
+                      {loading ? 'Adding...' : 'Add'}
+                    </button>
+                    }
+                  </>
                 }
-
-
               </div>
             </SongForm_Lyrics>
           )}
@@ -323,6 +331,11 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
                 </div>
 
               </SongForm_chordWithLyrics>
+            </>
+          )}
+          {mode === 'Chord' && (
+            <>
+              <SongForm_Chord />
             </>
           )}
         </div>

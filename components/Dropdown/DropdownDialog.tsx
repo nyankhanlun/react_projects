@@ -1,5 +1,7 @@
 "use client"
 
+import { deleteSongById, songById } from "@/app/actions/songs";
+import SongForm from "@/app/songs/song-form";
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -15,9 +17,10 @@ import {
   TriangleDownIcon
 } from "@radix-ui/react-icons";
 import Link from "next/link";
+import { notFound, useRouter } from "next/navigation";
 import { useState } from "react";
 
-type MenuType = 'lyrics' | 'chordLyrics' | 'chord' | 'update'
+type MenuType = 'lyrics' | 'chordLyrics' | 'chord' | 'update' | 'delete'
 
 type Props = {
   songId: any
@@ -25,14 +28,31 @@ type Props = {
 }
 
 export function DropdownMenuDialog({ onSelect, songId }: Props) {
+  const router = useRouter();
   const [selected, setSelected] = useState<MenuType>("lyrics")
   const [loading, setLoading] = useState(false)
+  const [deleteLoading, setDeleteLoading] = useState(false)
 
-  const handleSelect = (menu: MenuType) => {
+  const handleSelect = async (menu: MenuType) => {
     setSelected(menu)
     onSelect(menu)
   }
 
+  const deleteSongByID = async () => {
+    if (!confirm('Are you sure you want to delete this song?')) return;
+    try {
+      setDeleteLoading(true)
+      await deleteSongById(songId);
+    } catch (error) {
+      setDeleteLoading(false)
+      console.error("Error deleting song:", error);
+    }
+  };
+
+  const updateSongByID = () => {
+    setLoading(true)
+   router.push(`/songs/${songId}/edit`);
+  }
 
   return (
     <>
@@ -40,8 +60,8 @@ export function DropdownMenuDialog({ onSelect, songId }: Props) {
         <DropdownMenuTrigger asChild>
           <Button className="bg-white" size="responsive" variant="outline" aria-label="Open menu">
             {selected === 'lyrics' && "Lyrics"}
-            {selected === 'chordLyrics' && "Lyrics and Chord"}
-            {selected === 'chord' && "Chord"}
+            {selected === 'chordLyrics' && "Lyrics & Chord"}
+            {selected === 'chord' && "Chord Sheet Only"}
             <TriangleDownIcon />
           </Button>
         </DropdownMenuTrigger>
@@ -52,20 +72,41 @@ export function DropdownMenuDialog({ onSelect, songId }: Props) {
             <DropdownMenuItem onClick={() => handleSelect("lyrics")} className="hover:text-[#d8675e] hover:font-bold">
               Lyrics
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => handleSelect('chord')} className="hover:text-[#d8675e] hover:font-bold">
-              Chord
-            </DropdownMenuItem>
             <DropdownMenuItem onClick={() => handleSelect('chordLyrics')} className="hover:text-[#d8675e] hover:font-bold">
               Lyrics & Chord
             </DropdownMenuItem>
-            
-            <DropdownMenuItem
+            <DropdownMenuItem onClick={() => handleSelect('chord')} className="hover:text-[#d8675e] hover:font-bold">
+              Chord Sheet Only
+            </DropdownMenuItem>
+
+
+            {/* <DropdownMenuItem
               onClick={() => setLoading(true)}
             >
               <Link href={`/songs/${songId}/edit`} className="text-[#ff8a05] font-bold">
                 {loading ? 'Opening...' : 'Edit Song'}
               </Link>
+            </DropdownMenuItem> */}
+
+            <DropdownMenuItem
+              onClick={() => updateSongByID()}
+            >
+              <Link href='' className="text-[#ff8a05] font-bold">
+                {loading ? 'Loading...' : 'Edit Song'}
+              </Link>
+              {/* {isEditing && (
+                <SongForm song={song} actionsProp="edit" />
+              )} */}
             </DropdownMenuItem>
+
+            <DropdownMenuItem
+              onClick={() => deleteSongByID()}
+            >
+              <Link href='' className="text-[#ff8a05] font-bold">
+                {deleteLoading ? 'Loading...' : 'Delete Song'}
+              </Link>
+            </DropdownMenuItem>
+
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>

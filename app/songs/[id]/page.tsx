@@ -1,13 +1,7 @@
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { songById } from '../../actions/songs';
 import Header from '@/components/Header/header';
-import LyricsViewer from '@/components/Details/LyricsViewer/lyrics';
-import { DoubleArrowLeftIcon } from '@radix-ui/react-icons';
-import { DropdownMenuDialog } from '@/components/Dropdown/DropdownDialog';
 import SongDetailClientPage from './SongDetail';
-import { Song } from '@/app/types';
-
 
 type Props = {
   params: Promise<{ id: string }>;
