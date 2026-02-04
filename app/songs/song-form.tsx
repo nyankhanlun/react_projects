@@ -39,6 +39,7 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
 
   const [title, setTitle] = useState(song?.title ?? '');
   const [composer, setComposer] = useState(song?.composer ?? '');
+  const [originalKey, setOriginalKey] = useState(song?.originalKey ?? '')
   const [timeSignature, setTimeSignature] = useState(song?.timeSignature ?? '');
   const [bpm, setBpm] = useState(song?.bpm ?? '');
 
@@ -48,6 +49,10 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
 
   const handleInputComposerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setComposer(event.target.value);
+  };
+
+  const handleInputOriginalKeyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOriginalKey(event.target.value);
   };
 
   const handleTimeSignatureChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,6 +74,7 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
               ...song,
               title: title,
               composer: composer,
+              originalKey: originalKey,
               text_sections: data,
               createdAt: song?.createdAt,
               updatedAt: Date.now()
@@ -88,6 +94,7 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
           id: dateSt.toString(),
           title: title,
           composer: composer,
+          originalKey: originalKey,
           text_sections: data,
           createdAt: Date.now(),
           updatedAt: Date.now()
@@ -113,6 +120,7 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
             ...song,
             title: title,
             composer: composer,
+            originalKey: originalKey,
             timeSignature: timeSignature,
             bpm: bpm,
             key_sections: data,
@@ -129,6 +137,7 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
           id: dateStr.toString(),
           title: title,
           composer: composer,
+          originalKey: originalKey,
           timeSignature: timeSignature,
           bpm: bpm,
           key_sections: data,
@@ -183,7 +192,7 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
             </p>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="flex flex-col w-full">
               <label htmlFor="title" className="font-medium mb-1">
                 Title
@@ -217,6 +226,23 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
                 className="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
+
+            <div className="flex flex-col">
+              <label htmlFor="originalKey" className="font-medium mb-1">
+                Original Key
+              </label>
+              <input
+                value={originalKey}
+                onChange={handleInputOriginalKeyChange}
+                placeholder="Enter Original Key"
+                id="originalKey"
+                type="text"
+                name="originalKey"
+                disabled={!mode}
+                className="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+         
           </div>
 
         </div>

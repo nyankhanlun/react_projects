@@ -27,6 +27,7 @@ export type Song = {
   actions?: string;
   title: string;
   composer: string;
+  originalKey?: string;
   timeSignature?: string;
   bpm?: string;
   key_sections?: KeySection[] | any;

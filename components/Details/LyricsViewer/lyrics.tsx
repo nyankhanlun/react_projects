@@ -48,7 +48,7 @@ export default function LyricsViewer({ song }: { song: Song }) {
         rounded
         overflow-x-auto
       ">
-        {/* <p>Original Key - <span style={{ color: "yellow" }}>C</span> </p> */}
+        <p>Original Key - <span style={{ color: "yellow", fontWeight : "bold" }}>{song?.originalKey}</span> </p>
         {output}
 
       </pre>
