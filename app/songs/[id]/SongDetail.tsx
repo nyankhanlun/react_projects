@@ -23,7 +23,7 @@ export default function SongDetailClientPage({ song }: { song: Song }) {
         <>
             <div className="flex flex-col w-full gap-3">
                 <div className="flex flex-row items-center gap-4 w-full">
-                    <p className="text-2xl whitespace-nowrap text-[#1f5692] font-semibold">Song Detail (Lyrics & Chord)</p>
+                    <p className="text-1xl md:text-2xl whitespace-nowrap text-[#1f5692] font-semibold">Song Detail (Lyrics & Chord)</p>
                 </div>
 
                 <div className="flex flex-row items-center gap-4 w-full my-3">

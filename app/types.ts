@@ -5,6 +5,11 @@ export type User = {
   email: string;
 };
 
+export type ChordSheetSection = {
+  diagrams: any;
+  sheetImg: any;
+};
+
 export type ChordLyricsSection = {
   label: string;
   content: string;
@@ -32,6 +37,7 @@ export type Song = {
   bpm?: string;
   key_sections?: KeySection[] | any;
   text_sections?: TextSection[] | any;
+  chord_sections?: ChordSheetSection | any;
   createdAt?: any;
   updatedAt?: any;
 };

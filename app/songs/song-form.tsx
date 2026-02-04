@@ -61,6 +61,54 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
   const handleBpmChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBpm(event.target.value);
   };
+
+  async function handleSubmitChordSheet(data: Record<string, any>) {
+    setError(null);
+    setLoading(true);
+    try {
+
+      if (actionsProp === 'edit') {
+        try {
+          if (song?.id) {
+            const obj = {
+              ...song,
+              title: title,
+              composer: composer,
+              originalKey: originalKey,
+              chord_sections: data,
+              createdAt: song?.createdAt,
+              updatedAt: Date.now()
+            }
+            await updateSong(song.id, obj);
+          } else {
+            console.error("Cannot update song: Missing ID");
+          }
+        } catch (err: any) {
+          setTimeout(() => setError(err.message || 'Something went wrong'), 3000);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        const dateSt = Date.now()
+        const obj = {
+          id: dateSt.toString(),
+          title: title,
+          composer: composer,
+          originalKey: originalKey,
+          chord_sections: data,
+          createdAt: Date.now(),
+          updatedAt: Date.now()
+        }
+        await createSong(obj);
+      }
+      router.push('/songs');
+    } catch (err: any) {
+      setTimeout(() => setError(err.message || 'Something went wrong'), 3000);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function handleSubmitLyrics(data: Record<string, any>) {
     setError(null);
     setLoading(true);
@@ -101,7 +149,6 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
         }
         await createSong(obj);
       }
-
       router.push('/songs');
     } catch (err: any) {
       setTimeout(() => setError(err.message || 'Something went wrong'), 3000);
@@ -242,7 +289,7 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
                 className="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-         
+
           </div>
 
         </div>
@@ -266,17 +313,17 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
 
                 {actionsProp === 'edit' ?
                   <>
-                  {title !== '' && <button disabled={loading}
+                    {title !== '' && <button disabled={loading}
                       className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                     >
                       {loading ? 'Saving...' : 'Save'}
-                    </button> 
+                    </button>
                     }
-                    </>
+                  </>
                   :
                   <>
-                 
-                  {title !== '' && <button disabled={loading}
+
+                    {title !== '' && <button disabled={loading}
                       className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                     >
                       {loading ? 'Adding...' : 'Add'}
@@ -338,22 +385,24 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
                   </Link>
 
                   {actionsProp === 'edit' ?
-                    <button disabled={loading} type="submit"
-                      className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                    >
-
-                      {loading ? 'Saving...' : 'Save'}
-                    </button>
+                    <>
+                      {title !== '' && <button disabled={loading}
+                        className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                      >
+                        {loading ? 'Saving...' : 'Save'}
+                      </button>
+                      }
+                    </>
                     :
-                    <button disabled={loading} type="submit"
-                      className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                    >
-
-                      {loading ? 'Adding...' : 'Add'}
-                    </button>
+                    <>
+                      {title !== '' && <button disabled={loading}
+                        className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                      >
+                        {loading ? 'Adding...' : 'Add'}
+                      </button>
+                      }
+                    </>
                   }
-
-
                 </div>
 
               </SongForm_chordWithLyrics>
@@ -361,9 +410,47 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
           )}
           {mode === 'Chord' && (
             <>
-              <SongForm_Chord />
+              <SongForm_Chord song={song} onSubmit={handleSubmitChordSheet}>
+                {error && (
+                  <div className="mt-4 rounded bg-red-100 p-3 text-red-700">
+                    <p>Someting went wrong. try again!</p>
+                  </div>
+                )}
+
+                <div className="flex flex-col sm:flex-row gap-3 justify-end mt-10">
+                  <Link href={actionsProp === 'edit' ? `/songs/${song?.id}` : `/songs`} className="w-full sm:w-auto">
+                    <button
+                      className="w-full sm:w-auto px-4 py-2 border rounded text-gray-700 bg-[#E6E6E6] hover:bg-gray-100"
+                    >
+                      Cancel
+                    </button>
+                  </Link>
+
+                  {actionsProp === 'edit' ?
+                    <>
+                      {title !== '' && <button disabled={loading}
+                        className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                      >
+                        {loading ? 'Saving...' : 'Save'}
+                      </button>
+                      }
+                    </>
+                    :
+                    <>
+
+                      {title !== '' && <button disabled={loading}
+                        className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                      >
+                        {loading ? 'Adding...' : 'Add'}
+                      </button>
+                      }
+                    </>
+                  }
+                </div>
+              </SongForm_Chord>
             </>
           )}
+
         </div>
 
       </main>

@@ -69,17 +69,18 @@ export function DropdownMenuDialog({ onSelect, songId }: Props) {
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem onClick={() => handleSelect("lyrics")} className="hover:text-[#d8675e] hover:font-bold">
+
+            <DropdownMenuItem disabled={loading} onClick={() => handleSelect("lyrics")} className="hover:text-[#d8675e] hover:font-bold">
               Lyrics
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => handleSelect('chordLyrics')} className="hover:text-[#d8675e] hover:font-bold">
+            <DropdownMenuItem disabled={loading} onClick={() => handleSelect('chordLyrics')} className="hover:text-[#d8675e] hover:font-bold">
               Lyrics & Chord
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => handleSelect('chord')} className="hover:text-[#d8675e] hover:font-bold">
+            <DropdownMenuItem disabled={loading} onClick={() => handleSelect('chord')} className="hover:text-[#d8675e] hover:font-bold">
               Chord Sheet Only
             </DropdownMenuItem>
 
-            <DropdownMenuSeparator className="bg-slate-200 h-[2px]"/>
+            <DropdownMenuSeparator className="bg-slate-200 h-[2px]" />
             {/* <DropdownMenuItem
               onClick={() => setLoading(true)}
             >
@@ -94,9 +95,7 @@ export function DropdownMenuDialog({ onSelect, songId }: Props) {
               <Link href='' className="text-[#ff8a05] font-bold">
                 {loading ? 'Loading...' : 'Edit Song'}
               </Link>
-              {/* {isEditing && (
-                <SongForm song={song} actionsProp="edit" />
-              )} */}
+
             </DropdownMenuItem>
 
             <DropdownMenuItem
