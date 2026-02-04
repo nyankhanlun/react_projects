@@ -51,7 +51,7 @@ export function DropdownMenuDialog({ onSelect, songId }: Props) {
 
   const updateSongByID = () => {
     setLoading(true)
-   router.push(`/songs/${songId}/edit`);
+    router.push(`/songs/${songId}/edit`);
   }
 
   return (
@@ -79,7 +79,7 @@ export function DropdownMenuDialog({ onSelect, songId }: Props) {
               Chord Sheet Only
             </DropdownMenuItem>
 
-
+            <DropdownMenuSeparator className="bg-slate-200 h-[2px]"/>
             {/* <DropdownMenuItem
               onClick={() => setLoading(true)}
             >
@@ -102,7 +102,7 @@ export function DropdownMenuDialog({ onSelect, songId }: Props) {
             <DropdownMenuItem
               onClick={() => deleteSongByID()}
             >
-              <Link href='' className="text-[#ff8a05] font-bold">
+              <Link href='' className="text-[#b00000] font-bold">
                 {deleteLoading ? 'Loading...' : 'Delete Song'}
               </Link>
             </DropdownMenuItem>
