@@ -5,7 +5,7 @@ import { UploadIcon, Cross1Icon } from '@radix-ui/react-icons';
 import { Song } from '@/app/types';
 import Compressor from 'compressorjs';
 
-const MAX_FILE_SIZE = 20 * 1024 * 1024; 
+const MAX_FILE_SIZE = 20 * 1024 * 1024;
 const ALLOWED_TYPES = ["image/svg+xml", "image/png", "image/jpeg", "image/jpg"];
 
 interface SongFormProps {
@@ -15,12 +15,18 @@ interface SongFormProps {
 }
 
 export default function SongForm_Chord({ song, onSubmit, children }: SongFormProps) {
-    const LABEL = ["C", "Cm", "Dm", "F", "Gm", "Am"];
-    // const LABEL = ["C", "Cm", "D", "Dm", "E", "F", "Fm", "G", "Gm", "Ab", "A", "Am", "B"];
+    const LABEL_Dominant7_Chord = ["A7", "B7", "C7", "D7", "E7", "F7", "G7"];
+    const LABEL_Major7_Chord = ["A Major 7", "B Major 7", "C Major 7", "D Major 7", "E Major 7", "F Major 7", "G Major 7"];
+    const LABEL_Major_Chord = ["A", "B", "C", "D", "E", "F", "G"];
+    const LABEL_Minor7_Chord = ["Am7", "Bm7", "Cm7", "Dm7", "Em7", "Fm7", "Gm7"];
+    const LABEL_Minor_Chord = ["Am", "Bm", "Cm", "Dm", "Em", "Fm", "Gm"];
+    
+
     const [selected, setSelected] = useState<string[]>([]);
     const [file, setFile] = useState<File | null>(null);
     const [preview, setPreview] = useState<string | null>(null);
     const [error, setError] = useState<string>("");
+    const [activeTab, setActiveTab] = useState("Dominant 7 Chord");
 
     useEffect(() => {
         if (song?.chord_sections) {
@@ -112,33 +118,121 @@ export default function SongForm_Chord({ song, onSubmit, children }: SongFormPro
         }
         onSubmit(obj)
     }
+    const tabClass = (tab: any) =>
+        `inline-block p-4 border-b-2 rounded-t-lg ${activeTab === tab
+            ? "text-blue-600 border-blue-600"
+            : "border-transparent hover:text-blue-600 hover:border-blue-600"
+        }`;
 
     return (
         <>
             <form id="chord-form" onSubmit={handleSubmit}>
                 <h3 className="mb-4 font-semibold text-heading">Chord Diagram</h3>
-                {/* ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "Ab", "A", "A#", "B"] */}
+                <div className="mb-4 border-b border-gray-200">
+                    <ul className="flex flex-wrap -mb-px text-sm font-medium text-center">
+                        {["Dominant 7 Chord", "Major 7 Chord", "Major Chord", "Minor 7 Chord", "Minor Chord"].map((tab) => (
+                            <li key={tab} className="me-2">
+                                <p
+                                    className={tabClass(tab)}
+                                    onClick={() => setActiveTab(tab)}
+                                >
+                                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                                </p>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
 
-                <ul className="grid grid-cols-4 gap-2 w-full select-none text-sm mb-6 font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-lg sm:grid-cols-6">
-                    {LABEL.map((label: any) => (
-                        <li key={label}>
-                            <label className="flex items-center p-3 cursor-pointer">
-                                <input
-                                    type="checkbox"
-                                    checked={selected.includes(label)}
-                                    onChange={() => toggleCheckbox(label)}
-                                    className="w-4 h-4 rounded border-gray-300 bg-gray-100 focus:ring-2 focus:ring-blue-500"
-                                />
-                                <span className="ml-2">{label}</span>
-                            </label>
-                        </li>
-                    ))}
-                </ul>
+                {activeTab === "Dominant 7 Chord" && (
+                    <ul className="grid grid-cols-4 gap-2 w-full select-none text-sm mb-6 font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-lg sm:grid-cols-7">
+                        {LABEL_Dominant7_Chord.map((label: any) => (
+                            <li key={label}>
+                                <label className="flex items-center p-3 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        checked={selected.includes(label)}
+                                        onChange={() => toggleCheckbox(label)}
+                                        className="w-4 h-4 rounded border-gray-300 bg-gray-100 focus:ring-2 focus:ring-blue-500"
+                                    />
+                                    <span className="ml-2">{label}</span>
+                                </label>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+                {activeTab === "Major 7 Chord" && (
+                    <ul className="grid grid-cols-4 gap-2 w-full select-none text-sm mb-6 font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-lg sm:grid-cols-7">
+                        {LABEL_Major7_Chord.map((label: any) => (
+                            <li key={label}>
+                                <label className="flex items-center p-3 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        checked={selected.includes(label)}
+                                        onChange={() => toggleCheckbox(label)}
+                                        className="w-4 h-4 rounded border-gray-300 bg-gray-100 focus:ring-2 focus:ring-blue-500"
+                                    />
+                                    <span className="ml-2">{label}</span>
+                                </label>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+                {activeTab === "Major Chord" && (
+                    <ul className="grid grid-cols-4 gap-2 w-full select-none text-sm mb-6 font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-lg sm:grid-cols-7">
+                        {LABEL_Major_Chord.map((label: any) => (
+                            <li key={label}>
+                                <label className="flex items-center p-3 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        checked={selected.includes(label)}
+                                        onChange={() => toggleCheckbox(label)}
+                                        className="w-4 h-4 rounded border-gray-300 bg-gray-100 focus:ring-2 focus:ring-blue-500"
+                                    />
+                                    <span className="ml-2">{label}</span>
+                                </label>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+                {activeTab === "Minor 7 Chord" && (
+                    <ul className="grid grid-cols-4 gap-2 w-full select-none text-sm mb-6 font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-lg sm:grid-cols-7">
+                        {LABEL_Minor7_Chord.map((label: any) => (
+                            <li key={label}>
+                                <label className="flex items-center p-3 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        checked={selected.includes(label)}
+                                        onChange={() => toggleCheckbox(label)}
+                                        className="w-4 h-4 rounded border-gray-300 bg-gray-100 focus:ring-2 focus:ring-blue-500"
+                                    />
+                                    <span className="ml-2">{label}</span>
+                                </label>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+                {activeTab === "Minor Chord" && (
+                    <ul className="grid grid-cols-4 gap-2 w-full select-none text-sm mb-6 font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-lg sm:grid-cols-7">
+                        {LABEL_Minor_Chord.map((label: any) => (
+                            <li key={label}>
+                                <label className="flex items-center p-3 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        checked={selected.includes(label)}
+                                        onChange={() => toggleCheckbox(label)}
+                                        className="w-4 h-4 rounded border-gray-300 bg-gray-100 focus:ring-2 focus:ring-blue-500"
+                                    />
+                                    <span className="ml-2">{label}</span>
+                                </label>
+                            </li>
+                        ))}
+                    </ul>
+                )}
 
                 {(selected.length != 0 || preview) && (
                     <div className={classes.card}>
                         <div className={classes.container}>
-                            <div className="grid grid-cols-3 sm:grid-cols-6 gap-4">
+                            <div className="grid grid-cols-3 sm:grid-cols-4 gap-4">
                                 {selected.map((imgName, i) => (
                                     <div key={i} className={classes.imageWrapper}>
                                         <img src={`/chord_diagram/${imgName}.png`} className="w-full aspect-square object-cover rounded-lg" />

@@ -8,13 +8,6 @@ import { DropdownMenuDialog } from '@/components/Dropdown/DropdownDialog';
 import LyricsViewer from '@/components/Details/LyricsViewer/lyrics';
 import SongTransposer from '@/components/Details/ChordLyricsViewer/lyrics';
 import SheetViewer from '@/components/Details/ChordSheetViewer/sheetView';
-import dynamic from 'next/dynamic'
-
-
-const SongForm = dynamic(() => import('../song-form'), {
-    loading: () => <p>Loading form...</p>, // or your spinner component
-    ssr: false, // optional but recommended if the form is client-only
-})
 
 export default function SongDetailClientPage({ song }: { song: Song }) {
     const [activeMenu, setActiveMenu] = useState<'lyrics' | 'chordLyrics' | 'update' | 'chord' | 'delete'>('lyrics')

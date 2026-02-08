@@ -1,7 +1,6 @@
 "use client"
 
 import { deleteSongById, songById } from "@/app/actions/songs";
-import SongForm from "@/app/songs/song-form";
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -81,13 +80,6 @@ export function DropdownMenuDialog({ onSelect, songId }: Props) {
             </DropdownMenuItem>
 
             <DropdownMenuSeparator className="bg-slate-200 h-[2px]" />
-            {/* <DropdownMenuItem
-              onClick={() => setLoading(true)}
-            >
-              <Link href={`/songs/${songId}/edit`} className="text-[#ff8a05] font-bold">
-                {loading ? 'Opening...' : 'Edit Song'}
-              </Link>
-            </DropdownMenuItem> */}
 
             <DropdownMenuItem
               onClick={() => updateSongByID()}
