@@ -18,11 +18,11 @@ export function findSong(data: any, toKey: any) {
     if (toKey === info?.transpose_keys) {
 
       const infoArr = info.data
-      infoArr.map((content: any) => {
+      infoArr.map((content: any, index: any) => {
         const label = content.type
         const infoL = content.lyrics
         list.push(
-          <React.Fragment key={label} >
+          <React.Fragment key={index} >
             <div>Intro </div>
             < div > {info.intro} </div>
             < br />

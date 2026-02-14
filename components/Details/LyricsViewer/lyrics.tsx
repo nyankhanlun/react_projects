@@ -9,11 +9,11 @@ export default function LyricsViewer({ song }: { song: Song }) {
   if (song?.text_sections) {
     const songData: any = song?.text_sections
 
-    songData.map((content: any) => {
+    songData.map((content: any, index: any) => {
       const label = content.label
       const infoL = content.content
       output.push(
-        <React.Fragment key={label} >
+        <React.Fragment key={index} >
           <div style={{ color: "yellow" }}>
             <br></br>
             {label}</div>

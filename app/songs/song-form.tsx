@@ -207,12 +207,15 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
           <Header />
         </div>
 
-        {actionsProp === 'edit' && <Link href={`/songs/${song?.id}`} >
-          <button className={classes.responsive_back_btn}>
+        {actionsProp === 'edit' &&
+          <button
+            onClick={() => router.back()}
+            className={classes.responsive_back_btn}
+          >
             <DoubleArrowLeftIcon />
             <span className={classes.btn_text}>Back</span>
           </button>
-        </Link>}
+        }
 
         <div id="lyrics-form" className="w-full md:w-1xl lg:w-3xl mx-auto p-4 space-y-6 bg-white shadow-xl inset-shadow-xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

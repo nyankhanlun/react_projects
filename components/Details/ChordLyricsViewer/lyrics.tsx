@@ -13,11 +13,11 @@ export default function SongTransposer({ song }: { song: Song }) {
   let output: any = [];
   if(songData.length != 0) {
   const song_data : any = songData[0]?.chordLyricssection
-  song_data.map((content: any) => {
+  song_data.map((content: any, index: any) => {
     const label = content.label
     const infoL = content.content
     output.push(
-      <React.Fragment key={label} >
+      <React.Fragment key={index} >
         
         <div style={{ color: "yellow" }}>
           <br></br>

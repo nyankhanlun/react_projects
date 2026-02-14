@@ -1,8 +1,17 @@
 
 export type User = {
-  id: number;
+  id: string;
   name: string;
   email: string;
+  password?: string;
+  confirmpassword?: string;
+  country?: string;
+  role?: string, 
+  plan?: string,
+  stripeCustomerId?: string,
+  teamId?: string,
+  createdAt?: string,
+  onboardingDone?: boolean
 };
 
 export type ChordSheetSection = {
