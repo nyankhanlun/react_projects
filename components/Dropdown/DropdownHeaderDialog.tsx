@@ -46,13 +46,13 @@ export function DropdownHeaderMenuDialog({
 
           <DropdownMenuSeparator className="bg-slate-200 h-[2px]" />
 
-          <DropdownMenuItem
+          {/* <DropdownMenuItem
             onClick={handleLogout}
             className="text-red-600 font-medium"
             disabled={loading}
           >
             {loading ? "Logging out..." : "Logout"}
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
 
         </DropdownMenuGroup>
 
