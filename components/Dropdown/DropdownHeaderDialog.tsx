@@ -1,6 +1,5 @@
 "use client"
 
-import { logoutUser } from "@/app/actions/users_route"
 import Link from "next/link"
 import { useState } from "react"
 import {
@@ -12,17 +11,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
+type DropdownHeaderMenuDialogProps = {
+  children: React.ReactNode;
+  handleLogout: () => void; // or () => Promise<void>
+};
+
 export function DropdownHeaderMenuDialog({
   children,
-}: {
-  children: React.ReactNode
-}) {
+  handleLogout,
+}: DropdownHeaderMenuDialogProps) {
   const [loading, setLoading] = useState(false)
-
-  const handleLogout = async () => {
-    setLoading(true)
-    await logoutUser()
-  }
 
   return (
     <DropdownMenu>
@@ -46,13 +44,13 @@ export function DropdownHeaderMenuDialog({
 
           <DropdownMenuSeparator className="bg-slate-200 h-[2px]" />
 
-          {/* <DropdownMenuItem
+          <DropdownMenuItem
             onClick={handleLogout}
             className="text-red-600 font-medium"
             disabled={loading}
           >
             {loading ? "Logging out..." : "Logout"}
-          </DropdownMenuItem> */}
+          </DropdownMenuItem>
 
         </DropdownMenuGroup>
 

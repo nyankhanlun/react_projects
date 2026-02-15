@@ -3,15 +3,32 @@
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { clientAuth } from "@/lib/firebase-client";
 
 export default function SongsList({ list }: { list: any[] }) {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(clientAuth, (user) => {
+      if (!user) {
+        router.push("/login");
+      } else {
+        // console.log("Logged in:", user);
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, [router]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(search);
-    }, 400); 
+    }, 400);
 
     return () => clearTimeout(timer);
   }, [search]);
@@ -56,7 +73,7 @@ export default function SongsList({ list }: { list: any[] }) {
 
       <div className="flex flex-col w-full pt-10">
         <ol className="list-decimal list-inside space-y-2 text-gray-800">
-          {filteredSongs.map((song : any) => (
+          {filteredSongs.map((song: any) => (
             <li key={song.id} className="hover:text-[#d8675e]">
               <Link href={`/songs/${song.id}`}>{song.title}</Link>
             </li>

@@ -4,7 +4,7 @@
 import Header from '@/components/Header/header';
 import { createSong, updateSong } from '../actions/songs';
 import { Song } from '../types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import SongForm_Lyrics from '@/components/Song/songForm_lyrics';
 import { useRouter } from 'next/navigation';
@@ -12,17 +12,18 @@ import SongForm_chordWithLyrics from '@/components/Song/songForm_chordWithLyrics
 import { DoubleArrowLeftIcon } from '@radix-ui/react-icons';
 import classes from '@/app/songs/[id]/page.module.css'
 import SongForm_Chord from '@/components/Song/songForm_chord';
+import { onAuthStateChanged } from 'firebase/auth';
+import { clientAuth } from '@/lib/firebase-client';
 
 type SongFormProps = {
   song?: Song;
   actionsProp: "edit" | "create";
 };
-
 type SongMode = 'Lyrics' | 'ChordWithLyrics' | 'Chord';
 
-
 export default function SongForm({ song, actionsProp }: SongFormProps) {
-  const router = useRouter();
+  const router = useRouter()
+
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState<SongMode>();
@@ -36,7 +37,18 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
       setMode(value);
     }
   };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(clientAuth, (user) => {
+      if (!user) {
+        router.push("/login");
+      } else {
+        // console.log("Logged in:", user);
+      }
+      setLoading(false);
+    });
 
+    return () => unsubscribe();
+  }, [router]);
   const [title, setTitle] = useState(song?.title ?? '');
   const [composer, setComposer] = useState(song?.composer ?? '');
   const [originalKey, setOriginalKey] = useState(song?.originalKey ?? '')

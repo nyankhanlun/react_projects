@@ -2,17 +2,32 @@
 import Link from 'next/link'
 import classes from './page.module.css'
 import { DoubleArrowLeftIcon } from '@radix-ui/react-icons'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Song } from '@/app/types';
 import { DropdownMenuDialog } from '@/components/Dropdown/DropdownDialog';
 import LyricsViewer from '@/components/Details/LyricsViewer/lyrics';
 import SongTransposer from '@/components/Details/ChordLyricsViewer/lyrics';
 import SheetViewer from '@/components/Details/ChordSheetViewer/sheetView';
 import { useRouter } from 'next/navigation'
+import { onAuthStateChanged } from 'firebase/auth';
+import { clientAuth } from '@/lib/firebase-client';
 
 export default function SongDetailClientPage({ song }: { song: Song }) {
     const [activeMenu, setActiveMenu] = useState<'lyrics' | 'chordLyrics' | 'update' | 'chord' | 'delete'>('lyrics')
+     const [loading, setLoading] = useState(true);
     const router = useRouter()
+      useEffect(() => {
+        const unsubscribe = onAuthStateChanged(clientAuth, (user) => {
+          if (!user) {
+            router.push("/login");
+          } else {
+            // console.log("Logged in:", user);
+          }
+          setLoading(false);
+        });
+    
+        return () => unsubscribe();
+      }, [router]);
     return (
         <>
             <div className="flex flex-col w-full gap-3">

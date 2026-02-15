@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { getUsers } from '../actions/users';
 import { getFirestore, collection, addDoc, setDoc, doc, serverTimestamp } from "firebase/firestore";
-import { adminDb } from './../../util/firebaseConfig'
 import songs from './../../data/songs.json'
+import { adminDb } from '@/lib/firebase-admin';
 
 export default async function UsersPage() {
   async function uploadSongs() {

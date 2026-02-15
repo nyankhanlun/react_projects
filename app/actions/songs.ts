@@ -4,11 +4,10 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { Song } from '../types';
-import { adminDb } from './../../util/firebaseConfig'
-import * as admin from 'firebase-admin';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { deleteDoc } from 'firebase/firestore';
+import { adminDb } from '@/lib/firebase-admin';
 
 export async function getSongsCollectoin() {
   const collectionRef = adminDb.collection('songlist');
