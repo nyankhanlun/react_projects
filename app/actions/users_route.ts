@@ -8,13 +8,17 @@ import { User } from "../types";
 import { createUserWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 
 export async function registerUser(prevState: any, formData: FormData) {
-  const name = String(formData.get("name"));
-  const email = String(formData.get("email"));
-  const password = String(formData.get("password"));
-  const confirm = String(formData.get("confirmpassword"));
+  const name = formData.get("name")?.toString() ?? "";
+  const email = formData.get("email")?.toString() ?? "";
+  const password = formData.get("password")?.toString() ?? "";
+  const confirm = formData.get("confirmpassword")?.toString() ?? "";
+
+  if (password.length < 6) {
+    return { error: "Password must be at least 6 characters." };
+  }
 
   if (password !== confirm) {
-    return { error: "Passwords do not match or must be at least 6 characters." };
+    return { error: "Passwords do not match." };
   }
 
   try {
@@ -25,10 +29,10 @@ export async function registerUser(prevState: any, formData: FormData) {
 
     const user: User = {
       id: cred.user.uid,
-      name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      password: formData.get('password') as string,
-      confirmpassword: formData.get('confirmpassword') as string,
+      name: name,
+      email: email,
+      password: password,
+      confirmpassword: confirm,
       country: formData.get('country') as string,
       role: 'user',
       plan: 'free',
@@ -41,9 +45,17 @@ export async function registerUser(prevState: any, formData: FormData) {
     await collectionRef.doc(user?.id).set(
       user
     );
-    
+
   } catch (error: any) {
-    console.error("Error during sign up:", error.message);
+    if (error.code === "auth/email-already-in-use") {
+      return { error: "Email already exists" };
+    }
+
+    if (error.code === "auth/invalid-email") {
+      return { error: "Invalid email address" };
+    }
+
+    return { error: "Something went wrong" };
   }
   redirect("/login");
 }

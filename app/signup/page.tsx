@@ -5,7 +5,7 @@ import { useActionState } from "react";
 
 const initialState = { error: "" };
 export default function RegisterForm() {
-      const [state, formAction] = useActionState(registerUser, initialState);
+    const [state, formAction] = useActionState(registerUser, initialState);
     return (<>
         <section className="bg-gray-50">
             <div className="flex flex-col items-center justify-center min-h-screen px-6 py-8 mx-auto">
@@ -71,13 +71,13 @@ export default function RegisterForm() {
                             </div>
 
                             <div>
-                                <label htmlFor="confirm_password" className="block mb-2 text-sm font-medium text-gray-900">
+                                <label htmlFor="confirmpassword" className="block mb-2 text-sm font-medium text-gray-900">
                                     Confirm password
                                 </label>
                                 <input
                                     type="password"
-                                    id="confirm_password"
-                                    name="confirm_password"
+                                    id="confirmpassword"
+                                    name="confirmpassword"
                                     className="w-full p-2.5 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
                                     placeholder="Enter confirm password"
                                     required
@@ -98,8 +98,8 @@ export default function RegisterForm() {
                                 />
                             </div>
                             {state?.error && (
-        <p className="text-red-500 text-sm">{state.error}</p>
-      )}
+                                <p className="text-red-500 text-sm">{state.error}</p>
+                            )}
 
                             <button
                                 type="submit"
