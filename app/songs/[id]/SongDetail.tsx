@@ -4,13 +4,15 @@ import classes from './page.module.css'
 import { DoubleArrowLeftIcon } from '@radix-ui/react-icons'
 import { useEffect, useState } from 'react';
 import { Song } from '@/app/types';
-import { DropdownMenuDialog } from '@/components/Dropdown/DropdownDialog';
-import LyricsViewer from '@/components/Details/LyricsViewer/lyrics';
-import SongTransposer from '@/components/Details/ChordLyricsViewer/lyrics';
-import SheetViewer from '@/components/Details/ChordSheetViewer/sheetView';
 import { useRouter } from 'next/navigation'
 import { onAuthStateChanged } from 'firebase/auth';
 import { clientAuth } from '@/lib/firebase-client';
+import { DropdownMenuDialog } from '@/components/Dropdown/DropdownDialog';
+import dynamic from 'next/dynamic'
+
+const LyricsViewer = dynamic(() => import('@/components/Details/LyricsViewer/lyrics'))
+const SongTransposer = dynamic(() => import('@/components/Details/ChordLyricsViewer/lyrics'))
+const SheetViewer = dynamic(() => import('@/components/Details/ChordSheetViewer/sheetView'), { ssr: false })
 
 export default function SongDetailClientPage({ song }: { song: Song }) {
     const [activeMenu, setActiveMenu] = useState<'lyrics' | 'chordLyrics' | 'update' | 'chord' | 'delete'>('lyrics')

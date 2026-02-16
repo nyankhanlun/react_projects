@@ -1,7 +1,11 @@
+'use client';
 import Link from "next/link";
 import { registerUser } from "../actions/users_route";
+import { useActionState } from "react";
 
+const initialState = { error: "" };
 export default function RegisterForm() {
+      const [state, formAction] = useActionState(registerUser, initialState);
     return (<>
         <section className="bg-gray-50">
             <div className="flex flex-col items-center justify-center min-h-screen px-6 py-8 mx-auto">
@@ -22,7 +26,7 @@ export default function RegisterForm() {
                             Create an account
                         </h1>
 
-                        <form className="space-y-6" action={registerUser}>
+                        <form className="space-y-6" action={formAction}>
 
                             <div>
                                 <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">
@@ -93,12 +97,15 @@ export default function RegisterForm() {
                                     required
                                 />
                             </div>
+                            {state?.error && (
+        <p className="text-red-500 text-sm">{state.error}</p>
+      )}
 
                             <button
                                 type="submit"
                                 className="w-full px-5 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300"
                             >
-                                Create an account
+                                Register
                             </button>
 
                             <p className="text-sm text-gray-500">

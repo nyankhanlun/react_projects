@@ -1,7 +1,8 @@
 import { songById } from "@/app/actions/songs";
 import { notFound } from "next/navigation";
-import SongForm from "../../song-form";
+import dynamic from 'next/dynamic'
 
+const SongForm = dynamic(() => import('../../song-form'))
 type Props = {
     params: Promise<{ id: string }>;
 };

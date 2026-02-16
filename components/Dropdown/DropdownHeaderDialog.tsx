@@ -13,7 +13,7 @@ import {
 
 type DropdownHeaderMenuDialogProps = {
   children: React.ReactNode;
-  handleLogout: () => void; // or () => Promise<void>
+  handleLogout: () => Promise<void>;
 };
 
 export function DropdownHeaderMenuDialog({

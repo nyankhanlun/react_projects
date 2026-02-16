@@ -1,9 +1,10 @@
 import Header from "@/components/Header/header";
 import {  getSongsCollectoin } from "../actions/songs";
-import SongsList from "./song-list"; // client component
+import dynamic from 'next/dynamic'
 
-export const dynamic = 'force-dynamic'
+export const dynamic_force = 'force-dynamic'
 
+const SongsList = dynamic(() => import('./song-list'))
 export default async function SongsPage() {
   const list = await getSongsCollectoin()
 
@@ -12,7 +13,6 @@ export default async function SongsPage() {
       <div className="flex justify-end w-full text-right">
         <Header />
       </div>
-
       <SongsList list={list} />
     </main>
   );

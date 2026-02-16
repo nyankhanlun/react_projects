@@ -1,12 +1,13 @@
 import { notFound } from 'next/navigation';
 import { songById } from '../../actions/songs';
 import Header from '@/components/Header/header';
-import SongDetailClientPage from './SongDetail';
+import dynamic from 'next/dynamic'
 
 type Props = {
   params: Promise<{ id: string }>;
 };
 
+const SongDetailClientPage = dynamic(() => import('./SongDetail'))
 export default async function SongDetailPage({ params }: Props) {
   const { id } = await params;
   const song  = await songById(id);

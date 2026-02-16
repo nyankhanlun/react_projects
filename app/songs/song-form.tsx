@@ -6,14 +6,16 @@ import { createSong, updateSong } from '../actions/songs';
 import { Song } from '../types';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import SongForm_Lyrics from '@/components/Song/songForm_lyrics';
-import { useRouter } from 'next/navigation';
-import SongForm_chordWithLyrics from '@/components/Song/songForm_chordWithLyrics';
 import { DoubleArrowLeftIcon } from '@radix-ui/react-icons';
 import classes from '@/app/songs/[id]/page.module.css'
-import SongForm_Chord from '@/components/Song/songForm_chord';
 import { onAuthStateChanged } from 'firebase/auth';
 import { clientAuth } from '@/lib/firebase-client';
+import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic'
+
+const SongForm_chordWithLyrics = dynamic(() => import('@/components/Song/songForm_chordWithLyrics'))
+const SongForm_Lyrics = dynamic(() => import('@/components/Song/songForm_lyrics'))
+const SongForm_Chord = dynamic(() => import('@/components/Song/songForm_chord'), { ssr: false })
 
 type SongFormProps = {
   song?: Song;

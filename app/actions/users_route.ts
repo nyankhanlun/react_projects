@@ -1,25 +1,20 @@
 'use server';
 
-
 import { adminDb, adminAuth } from "@/lib/firebase-admin";
 import { clientAuth } from "@/lib/firebase-client";
-// import { adminDb } from './../../util/firebaseConfig'
-import * as admin from 'firebase-admin';
 import { redirect } from 'next/navigation';
 import { deleteDoc } from 'firebase/firestore';
 import { User } from "../types";
 import { createUserWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 
-
-
-export async function registerUser(formData: FormData) {
+export async function registerUser(prevState: any, formData: FormData) {
   const name = String(formData.get("name"));
   const email = String(formData.get("email"));
   const password = String(formData.get("password"));
   const confirm = String(formData.get("confirmpassword"));
 
   if (password !== confirm) {
-    throw new Error("Passwords do not match");
+    return { error: "Passwords do not match or must be at least 6 characters." };
   }
 
   try {
@@ -46,10 +41,11 @@ export async function registerUser(formData: FormData) {
     await collectionRef.doc(user?.id).set(
       user
     );
-    redirect("/login");
+    
   } catch (error: any) {
     console.error("Error during sign up:", error.message);
   }
+  redirect("/login");
 }
 
 export async function getUserCollectoin() {
