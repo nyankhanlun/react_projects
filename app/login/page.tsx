@@ -10,16 +10,20 @@ export default function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false); 
     const router = useRouter();
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         setError(null);
+        setLoading(true);
         try {
             await signInWithEmailAndPassword(clientAuth, email, password);
             router.push("/songs");
         } catch (err: any) {
             setError(err.message || "Login failed");
-        }
+        }finally {
+      setLoading(false);
+    }
     }
     return (
         <>
@@ -87,9 +91,10 @@ export default function LoginForm() {
 
                             <button
                                 type="submit"
+                                 disabled={loading}
                                 className="w-full py-3 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300"
                             >
-                                Log in
+                                 {loading ? <p className="animate-bounce">Logging in...</p> : "Log in"}
                             </button>
 
                             <p className="text-sm text-gray-500 text-center">
