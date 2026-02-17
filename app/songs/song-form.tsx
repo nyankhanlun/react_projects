@@ -456,8 +456,8 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
           )}
           {mode === 'Chord' && (
             <>
-            {lyricsWithChordLoading && <LoadingComponent />}
-            {!lyricsWithChordLoading && 
+            {chordOnlyLoading && <LoadingComponent />}
+            {!chordOnlyLoading && 
             <>
             <SongForm_Chord song={song} onSubmit={handleSubmitChordSheet}>
                 {error && (
@@ -487,10 +487,10 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
                     :
                     <>
 
-                      {title !== '' && <button disabled={loading}
+                      {title !== '' && <button disabled={chordOnlyLoading}
                         className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                       >
-                        {loading ? 'Adding...' : 'Add'}
+                        {chordOnlyLoading ? 'Adding...' : 'Add'}
                       </button>
                       }
                     </>
