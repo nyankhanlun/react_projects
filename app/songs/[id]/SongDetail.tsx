@@ -10,8 +10,8 @@ import { clientAuth } from '@/lib/firebase-client';
 import { DropdownMenuDialog } from '@/components/Dropdown/DropdownDialog';
 import dynamic from 'next/dynamic'
 
-const LyricsViewer = dynamic(() => import('@/components/Details/LyricsViewer/lyrics'))
-const SongTransposer = dynamic(() => import('@/components/Details/ChordLyricsViewer/lyrics'))
+const LyricsViewer = dynamic(() => import('@/components/Details/LyricsViewer/lyrics'), { ssr: false })
+const SongTransposer = dynamic(() => import('@/components/Details/ChordLyricsViewer/lyrics'), { ssr: false })
 const SheetViewer = dynamic(() => import('@/components/Details/ChordSheetViewer/sheetView'), { ssr: false })
 
 export default function SongDetailClientPage({ song }: { song: Song }) {

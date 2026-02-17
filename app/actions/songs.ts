@@ -10,7 +10,7 @@ import { deleteDoc } from 'firebase/firestore';
 import { adminDb } from '@/lib/firebase-admin';
 
 export async function getSongsCollectoin() {
-  const collectionRef = adminDb.collection('songlist');
+  const collectionRef = adminDb.collection('songlist').orderBy("createdAt", "desc");
   const snapshot = await collectionRef.get();
   const allSongs = snapshot.docs.map((doc : any) => ({
     id: doc.id,

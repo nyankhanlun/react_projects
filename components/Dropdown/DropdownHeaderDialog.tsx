@@ -46,7 +46,7 @@ export function DropdownHeaderMenuDialog({
 
           <DropdownMenuItem
             onClick={handleLogout}
-            className="text-red-600 font-medium"
+            className="text-[#b00000] font-medium"
             disabled={loading}
           >
             {loading ? "Logging out..." : "Logout"}

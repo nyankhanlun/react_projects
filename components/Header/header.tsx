@@ -46,6 +46,13 @@ export default function Header() {
                 </Link>
 
                 <nav className="hidden md:flex gap-6 text-md font-medium">
+
+                    <button
+                        type="button" onClick={handleLogout}
+                        className="text-gray-700 bg-gray-100 border border-gray-300 hover:bg-gray-200 hover:text-gray-900 focus:ring-4 focus:ring-gray-200 shadow-sm font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none transition"
+                    >
+                        Logout
+                    </button>
                     <NavLink href="/songs" >
                         All Songs
                     </NavLink>
@@ -56,12 +63,7 @@ export default function Header() {
                         Add New Song
                     </NavLink>
 
-                    <button
-                        type="button" onClick={handleLogout}
-                        className="text-gray-700 bg-gray-100 border border-gray-300 hover:bg-gray-200 hover:text-gray-900 focus:ring-4 focus:ring-gray-200 shadow-sm font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none transition"
-                    >
-                        Logout
-                    </button>
+                    
                 </nav>
 
                 <div className="md:hidden">
