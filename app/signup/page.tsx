@@ -16,7 +16,7 @@ export default function RegisterForm() {
         src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" 
         alt="logo"
       /> */}
-                    Gospel Chord Library
+                    Worship Library
                 </a>
 
                 <div className="w-full max-w-md bg-white rounded-lg shadow">
@@ -84,7 +84,7 @@ export default function RegisterForm() {
                                 />
                             </div>
 
-                            <div>
+                            {/* <div>
                                 <label htmlFor="country" className="block mb-2 text-sm font-medium text-gray-900">
                                     Country
                                 </label>
@@ -96,7 +96,7 @@ export default function RegisterForm() {
                                     placeholder="Enter Country"
                                     required
                                 />
-                            </div>
+                            </div> */}
                             {state?.error && (
                                 <p className="text-red-500 text-sm">{state.error}</p>
                             )}

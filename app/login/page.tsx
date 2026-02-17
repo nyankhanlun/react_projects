@@ -39,7 +39,7 @@ export default function LoginForm() {
                                 alt="logo"
                             /> */}
                             <h2 className="text-2xl font-semibold text-gray-900">
-                                Gospel Chord Library
+                                Worship Library
                             </h2>
                         </div>
 
