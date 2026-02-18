@@ -31,7 +31,7 @@ export default function Header() {
     const handleLogout = async () => {
         try {
             await signOut(clientAuth);
-            router.push("/login"); 
+            router.push("/login");
         } catch (error) {
             console.log("Error logging out:", error);
         }
@@ -56,14 +56,14 @@ export default function Header() {
                     <NavLink href="/songs" >
                         All Songs
                     </NavLink>
-                    {/* <NavLink href="/artist" >
-                        Artist
-                    </NavLink> */}
+
                     <NavLink href="/songs/new" >
                         Add New Song
                     </NavLink>
+                    <NavLink href="/" >
+                        Set List(0)
+                    </NavLink>
 
-                    
                 </nav>
 
                 <div className="md:hidden">
