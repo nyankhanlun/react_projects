@@ -9,6 +9,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { clientAuth } from '@/lib/firebase-client';
 import { DropdownMenuDialog } from '@/components/Dropdown/DropdownDialog';
 import dynamic from 'next/dynamic'
+import { useSetList } from '@/context/SetListContext';
 
 const LyricsViewer = dynamic(() => import('@/components/Details/LyricsViewer/lyrics'), { ssr: false })
 const SongTransposer = dynamic(() => import('@/components/Details/ChordLyricsViewer/lyrics'), { ssr: false })
@@ -17,6 +18,7 @@ const SheetViewer = dynamic(() => import('@/components/Details/ChordSheetViewer/
 export default function SongDetailClientPage({ song }: { song: Song }) {
     const [activeMenu, setActiveMenu] = useState<'lyrics' | 'chordLyrics' | 'update' | 'chord' | 'delete'>('lyrics')
     const [loading, setLoading] = useState(true);
+    const { addToSetList } = useSetList()
     const router = useRouter()
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(clientAuth, (user) => {
@@ -48,6 +50,7 @@ export default function SongDetailClientPage({ song }: { song: Song }) {
                     <div className="flex flex-row ml-auto">
                         <button
                             type="button"
+                             onClick={() => addToSetList(song)}
                             className="w-full sm:w-auto
                                         mx-3 sm:mx-5
                                         inline-flex items-center justify-center

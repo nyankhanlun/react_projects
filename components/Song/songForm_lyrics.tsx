@@ -15,7 +15,7 @@ interface SongFormProps {
 }
 
 export default function SongForm_Lyrics({ song, onSubmit, children }: SongFormProps) {
-    const LABEL = ["Verse 1", "Verse 2", "Verse 3", "Verse 4", "Verse 5", "Verse 6", "PRE-Chorus", "Chorus", "Bridge", "End", "Intro", "Tab"];
+    const LABEL = ["Verse 1", "Verse 2", "Verse 3", "Verse 4", "Verse 5", "Verse 6", "Pre-Chorus", "Chorus", "Bridge", "End", "A Capella Intro", "A Capella Outro"];
     const [toKey, setToKey] = useState("C");
     const [sections, setSections] = useState<Section[]>([]);
 
@@ -94,7 +94,7 @@ export default function SongForm_Lyrics({ song, onSubmit, children }: SongFormPr
                             <div className="flex items-center justify-between gap-4">
 
                                 <div className="flex flex-col w-full max-w-xs">
-                                    <label className="font-medium mb-1">Label</label>
+                                    {/* <label className="font-medium mb-1">Label</label> */}
                                     <select
                                         value={section.label}
                                         onChange={(e) =>
@@ -131,7 +131,7 @@ export default function SongForm_Lyrics({ song, onSubmit, children }: SongFormPr
                             </div>
 
                             <div className="flex flex-col">
-                                <label className="font-medium mb-1">Content</label>
+                                {/* <label className="font-medium mb-1">Content</label> */}
                                 <textarea
                                     value={section.content}
                                     onChange={(e) =>

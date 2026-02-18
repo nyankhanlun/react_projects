@@ -2,6 +2,7 @@ import localFont from 'next/font/local';
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { SetListProvider } from '@/context/SetListContext';
 
 const bravura = localFont({
   src: './fonts/Bravura.otf',
@@ -19,7 +20,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Chord Bank",
+  title: "Worship Library",
   description: "Easy to Search Chord and Lyrics",
 };
 
@@ -33,7 +34,9 @@ export default function DashboardLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bravura`}
       >
-        {children}
+       <SetListProvider>
+          {children}
+        </SetListProvider>
       </body>
     </html>
   );

@@ -8,8 +8,10 @@ import { DropdownHeaderMenuDialog } from '../Dropdown/DropdownHeaderDialog';
 import { signOut } from 'firebase/auth';
 import { clientAuth } from '@/lib/firebase-client';
 import { useRouter } from "next/navigation";
+import { useSetList } from '@/context/SetListContext';
 
 export default function Header() {
+    const { setList } = useSetList()
     const [open, setOpen] = useState(false);
     const router = useRouter()
     const menuRef = useRef<HTMLDivElement | null>(null);
@@ -54,20 +56,20 @@ export default function Header() {
                         Logout
                     </button>
                     <NavLink href="/songs" >
-                        All Songs
+                        Home
                     </NavLink>
 
                     <NavLink href="/songs/new" >
                         Add New Song
                     </NavLink>
-                    <NavLink href="/" >
-                        Set List(0)
+                    <NavLink href="/setlist" >
+                        Set List   ({setList.length})
                     </NavLink>
 
                 </nav>
 
                 <div className="md:hidden">
-                    <DropdownHeaderMenuDialog handleLogout={handleLogout}>
+                    <DropdownHeaderMenuDialog handleLogout={handleLogout} setList={setList}>
                         <HamburgerMenuIcon className="w-6 h-6" />
                     </DropdownHeaderMenuDialog>
                 </div>

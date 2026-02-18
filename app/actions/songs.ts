@@ -41,7 +41,7 @@ export async function updateSong(songId: string, data: Song) {
 export async function createSong(song: Song) {
   try {
   const collectionRef = adminDb.collection('songlist');
-   const docRef = await collectionRef.doc(song?.id).set({
+  const docRef = await collectionRef.doc(song?.id).set({
       ...song
     });
       revalidatePath('/songs');

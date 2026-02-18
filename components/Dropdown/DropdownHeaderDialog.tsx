@@ -12,11 +12,13 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 type DropdownHeaderMenuDialogProps = {
+  setList: any,
   children: React.ReactNode;
   handleLogout: () => Promise<void>;
 };
 
 export function DropdownHeaderMenuDialog({
+  setList,
   children,
   handleLogout,
 }: DropdownHeaderMenuDialogProps) {
@@ -35,11 +37,17 @@ export function DropdownHeaderMenuDialog({
         <DropdownMenuGroup>
 
           <DropdownMenuItem asChild>
-            <Link href="/songs">All Songs</Link>
+            <Link href="/songs">Home</Link>
           </DropdownMenuItem>
 
           <DropdownMenuItem asChild>
             <Link href="/songs/new">Add New Song</Link>
+          </DropdownMenuItem>
+
+          <DropdownMenuItem asChild>
+            <Link href="/setlist">
+             Set List   ({setList.length})
+            </Link>
           </DropdownMenuItem>
 
           <DropdownMenuSeparator className="bg-slate-200 h-[2px]" />
