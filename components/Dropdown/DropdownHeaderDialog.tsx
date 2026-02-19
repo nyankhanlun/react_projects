@@ -12,14 +12,14 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 type DropdownHeaderMenuDialogProps = {
-  currentUser: any,
+  isAdmin: boolean,
   setList: any,
   children: React.ReactNode;
   handleLogout: () => Promise<void>;
 };
 
 export function DropdownHeaderMenuDialog({
-  currentUser,
+  isAdmin,
   setList,
   children,
   handleLogout,
@@ -42,7 +42,7 @@ export function DropdownHeaderMenuDialog({
             <Link href="/songs">Home</Link>
           </DropdownMenuItem>
 
-          {currentUser.role === 'admin' && 
+          {isAdmin && 
           <DropdownMenuItem asChild>
             <Link href="/songs/new">Add New Song</Link>
           </DropdownMenuItem>

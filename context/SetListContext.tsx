@@ -20,7 +20,7 @@ export function SetListProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
   const [setList, setSetList] = useState<Song[]>([])
   const [currentUserID, setCurrentUserID] = useState<string>('')
-  const [currentUser, setCurrentUser] = useState<any>(null)
+  const [currentUser, setCurrentUser] = useState<any>('')
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(clientAuth, async (user) => {

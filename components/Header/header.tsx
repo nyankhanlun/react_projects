@@ -12,8 +12,8 @@ import { useSetList } from '@/context/SetListContext';
 
 export default function Header() {
     const { setList, currentUser } = useSetList()
-    console.log("current user", currentUser)
     const [open, setOpen] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     const router = useRouter()
     const menuRef = useRef<HTMLDivElement | null>(null);
     useEffect(() => {
@@ -31,6 +31,13 @@ export default function Header() {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [open]);
+
+    useEffect(() => {
+        if (currentUser?.role != null || currentUser?.role != undefined) {
+            const res = currentUser.role === 'admin' ? true : false
+            setIsAdmin(res)
+        }
+    }, [isAdmin]);
 
     const handleLogout = async () => {
         try {
@@ -61,7 +68,7 @@ export default function Header() {
                         Home
                     </NavLink>
 
-                    {currentUser?.role === "admin" && (
+                    {isAdmin && (
                         <NavLink href="/songs/new" >
                             Add New Song
                         </NavLink>
@@ -74,7 +81,7 @@ export default function Header() {
                 </nav>
 
                 <div className="md:hidden">
-                    <DropdownHeaderMenuDialog handleLogout={handleLogout} setList={setList} currentUser={currentUser}>
+                    <DropdownHeaderMenuDialog handleLogout={handleLogout} setList={setList} isAdmin={isAdmin}>
                         <HamburgerMenuIcon className="w-6 h-6" />
                     </DropdownHeaderMenuDialog>
                 </div>
