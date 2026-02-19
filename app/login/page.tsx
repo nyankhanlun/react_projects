@@ -19,6 +19,20 @@ export default function LoginForm() {
         try {
             await signInWithEmailAndPassword(clientAuth, email, password);
             router.push("/songs");
+            // const user = clientAuth.currentUser
+            // if (!user) return
+
+            // const token = await user.getIdToken()
+
+            // await fetch("/api/login", {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify({ token }),
+            // })
+
+
         } catch (err: any) {
             switch (err.code) {
                 case "auth/invalid-email":

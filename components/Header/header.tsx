@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { useSetList } from '@/context/SetListContext';
 
 export default function Header() {
-    const { setList } = useSetList()
+    const { setList, currentUser } = useSetList()
     const [open, setOpen] = useState(false);
     const router = useRouter()
     const menuRef = useRef<HTMLDivElement | null>(null);
@@ -30,6 +30,7 @@ export default function Header() {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [open]);
+
     const handleLogout = async () => {
         try {
             await signOut(clientAuth);
@@ -59,9 +60,12 @@ export default function Header() {
                         Home
                     </NavLink>
 
-                    <NavLink href="/songs/new" >
-                        Add New Song
-                    </NavLink>
+                    {currentUser?.role === "admin" && (
+                        <NavLink href="/songs/new" >
+                            Add New Song
+                        </NavLink>
+                    )}
+
                     <NavLink href="/setlist" >
                         Set List   ({setList.length})
                     </NavLink>
@@ -69,7 +73,7 @@ export default function Header() {
                 </nav>
 
                 <div className="md:hidden">
-                    <DropdownHeaderMenuDialog handleLogout={handleLogout} setList={setList}>
+                    <DropdownHeaderMenuDialog handleLogout={handleLogout} setList={setList} currentUser={currentUser}>
                         <HamburgerMenuIcon className="w-6 h-6" />
                     </DropdownHeaderMenuDialog>
                 </div>

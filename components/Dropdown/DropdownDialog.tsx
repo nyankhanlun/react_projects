@@ -11,6 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useSetList } from "@/context/SetListContext";
 
 import {
   TriangleDownIcon
@@ -27,6 +28,7 @@ type Props = {
 }
 
 export function DropdownMenuDialog({ onSelect, songId }: Props) {
+  const { currentUser } = useSetList()
   const router = useRouter();
   const [selected, setSelected] = useState<MenuType>("lyrics")
   const [loading, setLoading] = useState(false)
@@ -79,25 +81,26 @@ export function DropdownMenuDialog({ onSelect, songId }: Props) {
               Chord Sheet Only
             </DropdownMenuItem>
 
-            <DropdownMenuSeparator className="bg-slate-200 h-[2px]" />
+            {currentUser.role === 'admin' && <>
+              <DropdownMenuSeparator className="bg-slate-200 h-[2px]" />
 
-            <DropdownMenuItem
-              onClick={() => updateSongByID()}
-            >
-              <Link href='' className="text-[#ff8a05] font-bold">
-                {loading ? 'Loading...' : 'Edit Song'}
-              </Link>
+              <DropdownMenuItem
+                onClick={() => updateSongByID()}
+              >
+                <Link href='' className="text-[#ff8a05] font-bold">
+                  {loading ? 'Loading...' : 'Edit Song'}
+                </Link>
 
-            </DropdownMenuItem>
+              </DropdownMenuItem>
 
-            <DropdownMenuItem
-              onClick={() => deleteSongByID()}
-            >
-              <Link href='' className="text-[#b00000] font-bold">
-                {deleteLoading ? 'Loading...' : 'Delete Song'}
-              </Link>
-            </DropdownMenuItem>
-
+              <DropdownMenuItem
+                onClick={() => deleteSongByID()}
+              >
+                <Link href='' className="text-[#b00000] font-bold">
+                  {deleteLoading ? 'Loading...' : 'Delete Song'}
+                </Link>
+              </DropdownMenuItem>
+            </>}
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>

@@ -7,6 +7,7 @@ import { clientAuth } from "@/lib/firebase-client";
 import { useRouter } from "next/navigation";
 
 type SetListContextType = {
+  currentUser: any,
   currentUserID: string
   setList: Song[]
   addToSetList: (song: Song) => Promise<void>
@@ -19,18 +20,31 @@ export function SetListProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
   const [setList, setSetList] = useState<Song[]>([])
   const [currentUserID, setCurrentUserID] = useState<string>('')
+  const [currentUser, setCurrentUser] = useState<any>(null)
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(clientAuth, (user) => {
+    const unsubscribe = onAuthStateChanged(clientAuth, async (user) => {
       if (!user) {
         router.push("/login");
       } else {
         setCurrentUserID(user.uid)
+        await fetchUserData(user.uid)
       }
     });
 
     return () => unsubscribe();
   }, [router]);
+
+  const fetchUserData = async (uid: string) => {
+    try {
+      const res = await fetch(`/api/users?uid=${uid}`)
+      const data = await res.json()
+      setCurrentUser(data)
+    } catch (error) {
+      console.error("Error fetching user:", error)
+    }
+  }
+
 
   const fetchSetList = async () => {
     if (!currentUserID) return
@@ -97,7 +111,7 @@ export function SetListProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <SetListContext.Provider value={{ currentUserID, setList, addToSetList, removeFromSetList }}>
+    <SetListContext.Provider value={{ currentUser, currentUserID, setList, addToSetList, removeFromSetList }}>
       {children}
     </SetListContext.Provider>
   )
