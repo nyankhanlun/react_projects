@@ -61,15 +61,15 @@ export default function Header() {
                         Home
                     </NavLink>
 
-                    {/* {currentUser?.role === "admin" && (
+                    {currentUser?.role === "admin" && (
                         <NavLink href="/songs/new" >
                             Add New Song
                         </NavLink>
-                    )} */}
+                    )}
 
-                        <NavLink href="/songs/new" >
+                        {/* <NavLink href="/songs/new" >
                             Add New Song
-                        </NavLink>
+                        </NavLink> */}
 
                     <NavLink href="/setlist" >
                         Set List   ({setList.length})
