@@ -11,7 +11,8 @@ import { useRouter } from "next/navigation";
 import { useSetList } from '@/context/SetListContext';
 
 export default function Header() {
-    const { setList } = useSetList()
+    const { setList,currentUser } = useSetList()
+    console.log("current user", currentUser)
     const [open, setOpen] = useState(false);
     const router = useRouter()
     const menuRef = useRef<HTMLDivElement | null>(null);
