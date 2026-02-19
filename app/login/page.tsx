@@ -20,7 +20,18 @@ export default function LoginForm() {
             await signInWithEmailAndPassword(clientAuth, email, password);
             router.push("/songs");
         } catch (err: any) {
-            setError(err.message || "Login failed");
+            switch (err.code) {
+                case "auth/invalid-email":
+                    setError("Invalid email format.")
+                    break
+                case "auth/user-not-found":
+                case "auth/wrong-password":
+                case "auth/invalid-credential":
+                    setError("Incorrect email or password.")
+                    break
+                default:
+                    setError("Something went wrong. Please try again.")
+            }
         } finally {
             setLoading(false);
         }

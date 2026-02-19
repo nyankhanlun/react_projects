@@ -18,8 +18,9 @@ const SheetViewer = dynamic(() => import('@/components/Details/ChordSheetViewer/
 export default function SongDetailClientPage({ song }: { song: Song }) {
     const [activeMenu, setActiveMenu] = useState<'lyrics' | 'chordLyrics' | 'update' | 'chord' | 'delete'>('lyrics')
     const [loading, setLoading] = useState(true);
-    const { addToSetList } = useSetList()
+    const { addToSetList, setList } = useSetList()
     const router = useRouter()
+    const isAddedSetList = setList.some((s) => s.id === song.id)
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(clientAuth, (user) => {
             if (!user) {
@@ -40,7 +41,7 @@ export default function SongDetailClientPage({ song }: { song: Song }) {
                 </div>
 
                 <div className="flex flex-row items-center gap-4 w-full my-3">
-                    <button
+                    <button 
                         onClick={() => router.back()}
                         className={classes.responsive_back_btn}
                     >
@@ -50,24 +51,20 @@ export default function SongDetailClientPage({ song }: { song: Song }) {
                     <div className="flex flex-row ml-auto">
                         <button
                             type="button"
-                             onClick={() => addToSetList(song)}
-                            className="w-full sm:w-auto
-                                        mx-3 sm:mx-5
-                                        inline-flex items-center justify-center
-                                        bg-[#FFC300] hover:bg-[#FFEDC7]
-                                        border border-transparent
-                                        focus:ring-4 focus:ring-blue-300
-                                        shadow-sm font-medium leading-5
-                                        rounded-md
-                                        text-sm sm:text-base
-                                        px-2 sm:px-3
-                                       py-0
-                                        focus:outline-none 
-                                        transition-all duration-200
-                                    "
+                            disabled={isAddedSetList}
+                            onClick={() => addToSetList(song)}
+                            className = {`w-full sm:w-auto mx-3 sm:mx-5 inline-flex items-center justify-center
+                                            border border-transparent focus:ring-4 focus:ring-blue-300
+                                            shadow-sm font-medium leading-5 rounded-md text-sm sm:text-base px-2 sm:px-3 py-0
+                                            focus:outline-none transition-all duration-200
+                                    ${isAddedSetList
+                                        ? "bg-gray-400 cursor-not-allowed opacity-40"
+                                        : "bg-[#FFC300] hover:bg-[#FFEDC7]"
+                                    }
+                                `}
                         >
                             <StarFilledIcon className="w-4 h-4 sm:w-5 sm:h-5 mr-2 -ml-0.5" />
-                            Add to List
+                           {isAddedSetList ? "Added" : "Add to List"}
                         </button>
 
                         <DropdownMenuDialog onSelect={setActiveMenu} songId={song?.id} />
