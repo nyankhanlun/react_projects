@@ -21,15 +21,6 @@ export default function SetListPage() {
           <p className="text-1xl md:text-2xl whitespace-nowrap text-[#1f5692] font-semibold">Selected Song List</p>
         </div>
 
-        {/* <div className="flex flex-row items-center gap-4 w-full my-3">
-                    <button
-                        onClick={() => router.back()}
-                        className={classes.responsive_back_btn}
-                    >
-                        <DoubleArrowLeftIcon />
-                        <span className={classes.btn_text}>Back</span>
-                    </button>
-                </div> */}
       </div>
       <div className="p-5 w-full">
 

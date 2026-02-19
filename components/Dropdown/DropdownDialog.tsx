@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useSetList } from "@/context/SetListContext";
+// import { useSetList } from "@/context/SetListContext";
 
 import {
   TriangleDownIcon
@@ -28,7 +28,7 @@ type Props = {
 }
 
 export function DropdownMenuDialog({ onSelect, songId }: Props) {
-  const { currentUser } = useSetList()
+  // const { currentUser } = useSetList()
   const router = useRouter();
   const [selected, setSelected] = useState<MenuType>("lyrics")
   const [loading, setLoading] = useState(false)
@@ -81,7 +81,6 @@ export function DropdownMenuDialog({ onSelect, songId }: Props) {
               Chord Sheet Only
             </DropdownMenuItem>
 
-            {currentUser.role === 'admin' && <>
               <DropdownMenuSeparator className="bg-slate-200 h-[2px]" />
 
               <DropdownMenuItem
@@ -100,7 +99,6 @@ export function DropdownMenuDialog({ onSelect, songId }: Props) {
                   {deleteLoading ? 'Loading...' : 'Delete Song'}
                 </Link>
               </DropdownMenuItem>
-            </>}
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>

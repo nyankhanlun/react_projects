@@ -28,22 +28,22 @@ export function SetListProvider({ children }: { children: ReactNode }) {
         router.push("/login");
       } else {
         setCurrentUserID(user.uid)
-        await fetchUserData(user.uid)
+        // await fetchUserData(user.uid)
       }
     });
 
     return () => unsubscribe();
   }, [router]);
 
-  const fetchUserData = async (uid: string) => {
-    try {
-      const res = await fetch(`/api/users?uid=${uid}`)
-      const data = await res.json()
-      setCurrentUser(data)
-    } catch (error) {
-      console.error("Error fetching user:", error)
-    }
-  }
+  // const fetchUserData = async (uid: string) => {
+  //   try {
+  //     const res = await fetch(`/api/users?uid=${uid}`)
+  //     const data = await res.json()
+  //     setCurrentUser(data)
+  //   } catch (error) {
+  //     console.error("Error fetching user:", error)
+  //   }
+  // }
 
 
   const fetchSetList = async () => {
