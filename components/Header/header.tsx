@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { useSetList } from '@/context/SetListContext';
 
 export default function Header() {
-    const { setList,currentUser } = useSetList()
+    const { setList, currentUser } = useSetList()
     console.log("current user", currentUser)
     const [open, setOpen] = useState(false);
     const router = useRouter()
@@ -67,10 +67,6 @@ export default function Header() {
                         </NavLink>
                     )}
 
-                        {/* <NavLink href="/songs/new" >
-                            Add New Song
-                        </NavLink> */}
-
                     <NavLink href="/setlist" >
                         Set List   ({setList.length})
                     </NavLink>
@@ -78,7 +74,7 @@ export default function Header() {
                 </nav>
 
                 <div className="md:hidden">
-                    <DropdownHeaderMenuDialog handleLogout={handleLogout} setList={setList}>
+                    <DropdownHeaderMenuDialog handleLogout={handleLogout} setList={setList} currentUser={currentUser}>
                         <HamburgerMenuIcon className="w-6 h-6" />
                     </DropdownHeaderMenuDialog>
                 </div>
