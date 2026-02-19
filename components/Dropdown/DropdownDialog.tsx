@@ -11,14 +11,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-// import { useSetList } from "@/context/SetListContext";
+import { useSetList } from "@/context/SetListContext";
 
 import {
   TriangleDownIcon
 } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { notFound, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type MenuType = 'lyrics' | 'chordLyrics' | 'chord' | 'update' | 'delete'
 
@@ -28,11 +28,19 @@ type Props = {
 }
 
 export function DropdownMenuDialog({ onSelect, songId }: Props) {
-  // const { currentUser } = useSetList()
+  const { currentUser } = useSetList()
   const router = useRouter();
   const [selected, setSelected] = useState<MenuType>("lyrics")
   const [loading, setLoading] = useState(false)
   const [deleteLoading, setDeleteLoading] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    if (currentUser?.role != null || currentUser?.role != undefined) {
+      const res = currentUser.role === 'admin' ? true : false
+      setIsAdmin(res)
+    }
+  }, [isAdmin]);
 
   const handleSelect = async (menu: MenuType) => {
     setSelected(menu)
@@ -81,24 +89,28 @@ export function DropdownMenuDialog({ onSelect, songId }: Props) {
               Chord Sheet Only
             </DropdownMenuItem>
 
-              <DropdownMenuSeparator className="bg-slate-200 h-[2px]" />
+            {isAdmin && (
+              <>
+                <DropdownMenuSeparator className="bg-slate-200 h-[2px]" />
 
-              <DropdownMenuItem
-                onClick={() => updateSongByID()}
-              >
-                <Link href='' className="text-[#ff8a05] font-bold">
-                  {loading ? 'Loading...' : 'Edit Song'}
-                </Link>
+                <DropdownMenuItem
+                  onClick={() => updateSongByID()}
+                >
+                  <Link href='' className="text-[#ff8a05] font-bold">
+                    {loading ? 'Loading...' : 'Edit Song'}
+                  </Link>
 
-              </DropdownMenuItem>
+                </DropdownMenuItem>
 
-              <DropdownMenuItem
-                onClick={() => deleteSongByID()}
-              >
-                <Link href='' className="text-[#b00000] font-bold">
-                  {deleteLoading ? 'Loading...' : 'Delete Song'}
-                </Link>
-              </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => deleteSongByID()}
+                >
+                  <Link href='' className="text-[#b00000] font-bold">
+                    {deleteLoading ? 'Loading...' : 'Delete Song'}
+                  </Link>
+                </DropdownMenuItem>
+              </>
+            )}
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
