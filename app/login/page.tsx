@@ -20,12 +20,14 @@ export default function LoginForm() {
         setIsLoggedInloading(true);
         const unsubscribe = onAuthStateChanged(clientAuth, async (user) => {
             if (!user) {
+                setIsLoggedInloading(false)
                 router.push("/login");
             } else {
+                setIsLoggedInloading(false)
                 router.push("/songs");
             }
         });
-        setIsLoggedInloading(false)
+        
         return () => unsubscribe();
     }, [router]);
 
@@ -79,7 +81,7 @@ export default function LoginForm() {
     }
     return (
         <>
-            {isLoggedInloading ? (
+            {!isLoggedInloading ? (
                 <section className="bg-gray-50 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
                     <div className="w-full max-w-md sm:max-w-lg md:max-w-xl bg-white rounded-lg shadow-md">
 
