@@ -52,8 +52,8 @@ export default function Header() {
         <header className="w-full">
             <div className="mx-auto max-w-7xl flex items-center justify-between py-3">
                 {/* Logo here */}
-                <Link href="" className="text-xl font-bold text-blue-600">
-                    {/* ChordBank */}
+                <Link href="" className="text-2xl font-bold text-[#ff8a05] uppercase">
+                   {/* Worship Lirbary */}
                 </Link>
 
                 <nav className="hidden md:flex gap-6 text-md font-medium">
