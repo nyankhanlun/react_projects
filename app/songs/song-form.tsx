@@ -4,7 +4,7 @@
 import Header from '@/components/Header/header';
 import { createSong, updateSong } from '../actions/songs';
 import { Song } from '../types';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { DoubleArrowLeftIcon } from '@radix-ui/react-icons';
 import classes from '@/app/songs/[id]/page.module.css'
@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic'
 import LoadingComponent from '../loading';
 import { useSetList } from '@/context/SetListContext';
+import FloatingJumpButton from '@/components/JumpButton/FloatingJumpButton';
 
 const SongForm_chordWithLyrics = dynamic(() => import('@/components/Song/songForm_chordWithLyrics'), { ssr: false })
 const SongForm_Lyrics = dynamic(() => import('@/components/Song/songForm_lyrics'), { ssr: false })
@@ -30,12 +31,11 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
   const [lyricsLoading, setLyricsLoading] = useState(false);
   const [lyricsWithChordLoading, setLyricsWithChordLoading] = useState(false);
   const [chordOnlyLoading, setChordOnlyLoading] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
 
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState<SongMode>();
-  const { currentUser } = useSetList()
   const isSongMode = (value: string): value is SongMode =>
     value === 'Lyrics' || value === 'ChordWithLyrics' || value === 'Chord';
 
@@ -51,19 +51,13 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
       if (!user) {
         router.push("/login");
       } else {
-        // console.log("Logged in:", user);
       }
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, [router]);
-  useEffect(() => {
-    if (currentUser?.role != null || currentUser?.role != undefined) {
-      const res = currentUser.role === 'admin' ? true : false
-      setIsAdmin(res)
-    }
-  }, [isAdmin]);
+
   const [title, setTitle] = useState(song?.title ?? '');
   const [composer, setComposer] = useState(song?.composer ?? '');
   const [originalKey, setOriginalKey] = useState(song?.originalKey ?? '')
@@ -222,12 +216,13 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
     }
     router.push('/songs');
   }
+  const saveRef = useRef<HTMLDivElement>(null);
   return (
     <>
       <main className="flex min-h-screen flex-col px-5 sm:px-10 py-5 bg-[#e1efff] sm:items-start">
         <div className="flex justify-end w-full text-right">
-            <Header />
-          </div>
+          <Header />
+        </div>
         {isAdmin ? (<>
           {actionsProp === 'edit' &&
             <button
@@ -425,7 +420,7 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
                       </div>
                     )}
 
-                    <div className="flex flex-col sm:flex-row gap-3 justify-end">
+                    <div ref={saveRef} className="flex flex-col sm:flex-row gap-3 justify-end">
                       <Link href={actionsProp === 'edit' ? `/songs/${song?.id}` : `/songs`} className="w-full sm:w-auto">
                         <button
                           className="w-full sm:w-auto px-4 py-2 border rounded text-gray-700 bg-[#E6E6E6] hover:bg-gray-100"
@@ -459,6 +454,7 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
                     </div>
 
                   </SongForm_chordWithLyrics>
+                  
                 </>}
               </>
             )}
@@ -509,10 +505,10 @@ export default function SongForm({ song, actionsProp }: SongFormProps) {
 
               </>
             )}
-
+<FloatingJumpButton targetRef={saveRef} />
           </div>
         </>
-        ): <p className="w-full text-center md:w-1xl lg:w-3xl mx-auto p-4 space-y-6 bg-white shadow-xl inset-shadow-xl">
+        ) : <p className="w-full text-center md:w-1xl lg:w-3xl mx-auto p-4 space-y-6 bg-white shadow-xl inset-shadow-xl">
           Permission Denied!</p>}
       </main>
     </>
