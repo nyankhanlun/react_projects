@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import NavLink from './NavLink';
@@ -12,32 +12,15 @@ import { useSetList } from '@/context/SetListContext';
 
 export default function Header() {
     const { setList, currentUser } = useSetList()
-    const [open, setOpen] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
     const router = useRouter()
-    const menuRef = useRef<HTMLDivElement | null>(null);
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-                setOpen(false);
-            }
-        };
-
-        if (open) {
-            document.addEventListener("mousedown", handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [open]);
 
     useEffect(() => {
         if (currentUser?.role != null || currentUser?.role != undefined) {
             const res = currentUser.role === 'admin' ? true : false
             setIsAdmin(res)
         }
-    }, [isAdmin]);
+    });
 
     const handleLogout = async () => {
         try {

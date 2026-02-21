@@ -17,7 +17,7 @@ import {
   TriangleDownIcon
 } from "@radix-ui/react-icons";
 import Link from "next/link";
-import { notFound, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type MenuType = 'lyrics' | 'chordLyrics' | 'chord' | 'update' | 'delete'
@@ -40,7 +40,7 @@ export function DropdownMenuDialog({ onSelect, songId }: Props) {
       const res = currentUser.role === 'admin' ? true : false
       setIsAdmin(res)
     }
-  }, [isAdmin]);
+  });
 
   const handleSelect = async (menu: MenuType) => {
     setSelected(menu)
