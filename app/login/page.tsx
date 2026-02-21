@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { browserLocalPersistence, browserSessionPersistence, onAuthStateChanged, sendPasswordResetEmail, setPersistence, signInWithEmailAndPassword } from "firebase/auth";
 import { clientAuth } from "@/lib/firebase-client";
 
 export default function LoginForm() {
@@ -11,28 +11,51 @@ export default function LoginForm() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
+    const [rememberMe, setRememberMe] = useState<boolean>(false);
     const router = useRouter();
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(clientAuth, async (user) => {
+            if (!user) {
+                router.push("/login");
+            } else {
+                router.push("/songs");
+            }
+        });
+        return () => unsubscribe();
+    }, [router]);
+
+    const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setRememberMe(e.target.checked);
+    };
+
+    const handleForgotPassword = async () => {
+        if (!email) {
+            alert("Please enter your email first.");
+            return;
+        }
+
+        try {
+            await sendPasswordResetEmail(clientAuth, email);
+            alert("Password reset email sent!");
+        } catch (error: any) {
+            console.error(error.message);
+            alert(error.message);
+        }
+    };
+
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         setError(null);
         setLoading(true);
         try {
+            if (rememberMe) {
+                await setPersistence(clientAuth, browserLocalPersistence);
+            } else {
+                await setPersistence(clientAuth, browserSessionPersistence);
+            }
             await signInWithEmailAndPassword(clientAuth, email, password);
             router.push("/songs");
-            // const user = clientAuth.currentUser
-            // if (!user) return
-
-            // const token = await user.getIdToken()
-
-            // await fetch("/api/login", {
-            //     method: "POST",
-            //     headers: {
-            //         "Content-Type": "application/json",
-            //     },
-            //     body: JSON.stringify({ token }),
-            // })
-
-
         } catch (err: any) {
             switch (err.code) {
                 case "auth/invalid-email":
@@ -101,15 +124,18 @@ export default function LoginForm() {
                             </div>
 
                             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                                {/* <label className="flex items-center text-sm text-gray-500">
+                                <label className="flex items-center text-sm text-gray-500">
                                     <input
                                         type="checkbox"
+                                        checked={rememberMe}
+                                        onChange={handleCheckboxChange}
                                         className="mr-2 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                                     />
                                     Remember me
                                 </label>
 
-                                <a href="#" className="text-sm font-medium text-blue-600 hover:underline">
+                                {/* <a onClick={handleForgotPassword}
+                                    className="text-sm font-medium text-blue-600 hover:underline">
                                     Forgot password?
                                 </a> */}
                             </div>
