@@ -4,7 +4,6 @@ import classes from './card.module.css'
 import { UploadIcon, Cross1Icon } from '@radix-ui/react-icons';
 import { Song } from '@/app/types';
 import Compressor from 'compressorjs';
-import { DropdownChordDiagramMenuDialog } from '../Dropdown/DropdownChordDiagramMenuDialog';
 
 const MAX_FILE_SIZE = 20 * 1024 * 1024;
 const ALLOWED_TYPES = ["image/svg+xml", "image/png", "image/jpeg", "image/jpg"];
@@ -16,14 +15,12 @@ interface SongFormProps {
 }
 
 export default function SongForm_Chord({ song, onSubmit, children }: SongFormProps) {
-    const [activeMenu, setActiveMenu] = useState<'Dominant 7 Chord' | 'Major 7 Chord' | 'Major Chord' | 'Minor 7 Chord' | 'Minor Chord'| 'Sharp Flat Major Chord'| 'Sharp Flat Minor Chord'>('Dominant 7 Chord')
     const LABEL_Dominant7_Chord = ["A7", "B7", "C7", "D7", "E7", "F7", "G7"];
     const LABEL_Major7_Chord = ["A Major 7", "B Major 7", "C Major 7", "D Major 7", "E Major 7", "F Major 7", "G Major 7"];
     const LABEL_Major_Chord = ["A", "B", "C", "D", "E", "F", "G"];
     const LABEL_Minor7_Chord = ["Am7", "Bm7", "Cm7", "Dm7", "Em7", "Fm7", "Gm7"];
     const LABEL_Minor_Chord = ["Am", "Bm", "Cm", "Dm", "Em", "Fm", "Gm"];
-    const LABEL_Sharp_Flat_Major_Chord = ["A♯B♭Major","C♯D♭Major","D♯E♭Major","F♯G♭Major","G♯A♭Major"];
-    const LABEL_Sharp_Flat_Minor_Chord = ["A♯B♭min","C♯D♭min","D♯E♭min","F♯G♭min","G♯A♭min"];
+    
 
     const [selected, setSelected] = useState<string[]>([]);
     const [file, setFile] = useState<File | null>(null);
@@ -130,12 +127,23 @@ export default function SongForm_Chord({ song, onSubmit, children }: SongFormPro
     return (
         <>
             <form id="chord-form" onSubmit={handleSubmit}>
-                <h3 className="mb-4 font-semibold text-heading">Choose Chord Diagram</h3>
-                <div className="mb-4">
-                    <DropdownChordDiagramMenuDialog onSelect={setActiveMenu} />
+                <h3 className="mb-4 font-semibold text-heading">Chord Diagram</h3>
+                <div className="mb-4 border-b border-gray-200">
+                    <ul className="flex flex-wrap -mb-px text-sm font-medium text-center">
+                        {["Dominant 7 Chord", "Major 7 Chord", "Major Chord", "Minor 7 Chord", "Minor Chord"].map((tab) => (
+                            <li key={tab} className="me-2">
+                                <p
+                                    className={tabClass(tab)}
+                                    onClick={() => setActiveTab(tab)}
+                                >
+                                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                                </p>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
 
-                {activeMenu === "Dominant 7 Chord" && (
+                {activeTab === "Dominant 7 Chord" && (
                     <ul className="grid grid-cols-4 gap-2 w-full select-none text-sm mb-6 font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-lg sm:grid-cols-7">
                         {LABEL_Dominant7_Chord.map((label: any) => (
                             <li key={label}>
@@ -152,7 +160,7 @@ export default function SongForm_Chord({ song, onSubmit, children }: SongFormPro
                         ))}
                     </ul>
                 )}
-                {activeMenu === "Major 7 Chord" && (
+                {activeTab === "Major 7 Chord" && (
                     <ul className="grid grid-cols-4 gap-2 w-full select-none text-sm mb-6 font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-lg sm:grid-cols-7">
                         {LABEL_Major7_Chord.map((label: any) => (
                             <li key={label}>
@@ -169,7 +177,7 @@ export default function SongForm_Chord({ song, onSubmit, children }: SongFormPro
                         ))}
                     </ul>
                 )}
-                {activeMenu === "Major Chord" && (
+                {activeTab === "Major Chord" && (
                     <ul className="grid grid-cols-4 gap-2 w-full select-none text-sm mb-6 font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-lg sm:grid-cols-7">
                         {LABEL_Major_Chord.map((label: any) => (
                             <li key={label}>
@@ -186,7 +194,7 @@ export default function SongForm_Chord({ song, onSubmit, children }: SongFormPro
                         ))}
                     </ul>
                 )}
-                {activeMenu === "Minor 7 Chord" && (
+                {activeTab === "Minor 7 Chord" && (
                     <ul className="grid grid-cols-4 gap-2 w-full select-none text-sm mb-6 font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-lg sm:grid-cols-7">
                         {LABEL_Minor7_Chord.map((label: any) => (
                             <li key={label}>
@@ -203,44 +211,9 @@ export default function SongForm_Chord({ song, onSubmit, children }: SongFormPro
                         ))}
                     </ul>
                 )}
-                {activeMenu === "Minor Chord" && (
+                {activeTab === "Minor Chord" && (
                     <ul className="grid grid-cols-4 gap-2 w-full select-none text-sm mb-6 font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-lg sm:grid-cols-7">
                         {LABEL_Minor_Chord.map((label: any) => (
-                            <li key={label}>
-                                <label className="flex items-center p-3 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        checked={selected.includes(label)}
-                                        onChange={() => toggleCheckbox(label)}
-                                        className="w-4 h-4 rounded border-gray-300 bg-gray-100 focus:ring-2 focus:ring-blue-500"
-                                    />
-                                    <span className="ml-2">{label}</span>
-                                </label>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-                {activeMenu === "Sharp Flat Major Chord" && (
-                    <ul className="grid grid-cols-2 gap-2 w-full select-none text-sm mb-6 font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-lg sm:grid-cols-7">
-                        {LABEL_Sharp_Flat_Major_Chord.map((label: any) => (
-                            <li key={label}>
-                                <label className="flex items-center p-3 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        checked={selected.includes(label)}
-                                        onChange={() => toggleCheckbox(label)}
-                                        className="w-4 h-4 rounded border-gray-300 bg-gray-100 focus:ring-2 focus:ring-blue-500"
-                                    />
-                                    <span className="ml-2">{label}</span>
-                                </label>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-                
-                {activeMenu === "Sharp Flat Minor Chord" && (
-                    <ul className="grid grid-cols-2 gap-2 w-full select-none text-sm mb-6 font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-lg sm:grid-cols-7">
-                        {LABEL_Sharp_Flat_Minor_Chord.map((label: any) => (
                             <li key={label}>
                                 <label className="flex items-center p-3 cursor-pointer">
                                     <input
