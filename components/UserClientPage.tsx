@@ -95,7 +95,6 @@ export default function UserClient({ users }: Props) {
                 <th className="px-6 py-3">Name</th>
                 <th className="px-6 py-3">Role</th>
                 <th className="px-6 py-3">Remainding Days</th>
-                <th className="px-6 py-3">Status</th>
                 <th className="px-6 py-3">Action</th>
               </tr>
             </thead>
@@ -126,17 +125,6 @@ export default function UserClient({ users }: Props) {
                   <td className="px-6 py-4 whitespace-nowrap">
                     30
                   </td>
-
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      {user.onboardingDone ? <>
-                        <div className="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>Active</>
-                        :
-                        <><div className="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>InActive</>
-                      }
-                    </div>
-                  </td>
-
                   <td className="px-6 py-4 whitespace-nowrap">
                     <Link href={`/users/${user.id}`} className="font-medium text-blue-600 hover:underline">Detail</Link>
                     <span className="font-medium text-yellow-600 hover:underline mx-3">Disable</span>
