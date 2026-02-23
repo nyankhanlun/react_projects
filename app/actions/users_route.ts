@@ -1,24 +1,25 @@
 'use server';
 
+
 import { adminDb, adminAuth } from "@/lib/firebase-admin";
 import { clientAuth } from "@/lib/firebase-client";
+// import { adminDb } from './../../util/firebaseConfig'
+import * as admin from 'firebase-admin';
 import { redirect } from 'next/navigation';
 import { deleteDoc } from 'firebase/firestore';
 import { User } from "../types";
 import { createUserWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { cookies } from "next/headers";
 
-export async function registerUser(prevState: any, formData: FormData) {
-  const name = formData.get("name")?.toString() ?? "";
-  const email = formData.get("email")?.toString() ?? "";
-  const password = formData.get("password")?.toString() ?? "";
-  const confirm = formData.get("confirmpassword")?.toString() ?? "";
 
-  if (password.length < 6) {
-    return { error: "Password must be at least 6 characters." };
-  }
+export async function registerUser(formData: FormData) {
+  const name = String(formData.get("name"));
+  const email = String(formData.get("email"));
+  const password = String(formData.get("password"));
+  const confirm = String(formData.get("confirmpassword"));
 
   if (password !== confirm) {
-    return { error: "Passwords do not match." };
+    throw new Error("Passwords do not match");
   }
 
   try {
@@ -29,12 +30,11 @@ export async function registerUser(prevState: any, formData: FormData) {
 
     const user: User = {
       id: cred.user.uid,
-      name: name,
-      email: email,
-      password: password,
-      confirmpassword: confirm,
-      // country: formData.get('country') as string,
-      country: '',
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      password: formData.get('password') as string,
+      confirmpassword: formData.get('confirmpassword') as string,
+      country: formData.get('country') as string,
       role: 'user',
       plan: 'free',
       teamId: '',
@@ -46,20 +46,15 @@ export async function registerUser(prevState: any, formData: FormData) {
     await collectionRef.doc(user?.id).set(
       user
     );
-
+    redirect("/login");
   } catch (error: any) {
-    if (error.code === "auth/email-already-in-use") {
-      return { error: "Email already exists" };
-    }
-
-    if (error.code === "auth/invalid-email") {
-      return { error: "Invalid email address" };
-    }
-
-    return { error: "Something went wrong" };
+    console.error("Error during sign up:", error.message);
   }
-  redirect("/login");
+
+
 }
+
+
 
 export async function getUserCollectoin() {
   const collectionRef = adminDb.collection('users');

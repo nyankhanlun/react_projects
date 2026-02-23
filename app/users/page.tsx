@@ -1,50 +1,17 @@
-import Link from 'next/link';
-import { getUsers } from '../actions/users';
-import { getFirestore, collection, addDoc, setDoc, doc, serverTimestamp } from "firebase/firestore";
-import songs from './../../data/songs.json'
-import { adminDb } from '@/lib/firebase-admin';
+import { Suspense } from "react";
+import { getUserCollectoin } from "../actions/users_route";
+import UserClient from "@/components/UserClientPage";
 
-export default async function UsersPage() {
-  async function uploadSongs() {
-    const batch = adminDb.batch();
+async function UsersList() {
+  const users = await getUserCollectoin()
+  return <UserClient users={users} />
+}
+export default function UsersPage() {
 
-    songs.forEach((song) => {
-      const docRef = adminDb.collection("songlist").doc(String(song.id));
-    
-      batch.set(docRef, {
-        ...song,
-         createdAt: Date.now(), 
-      });
-    });
-
-    await batch.commit();
-    console.log("✅ Songs uploaded successfully!");
-  }
-
-  // uploadSongs().catch(console.error);
-
-  const users = await getUsers();
   return (
-    <div style={{ padding: 20 }}>
-      <h1>User Management</h1>
+    <Suspense fallback={<p>Fetching songs...</p>} >
+      <UsersList />
+    </Suspense>
+  )
 
-      {/* Create page link */}
-      <Link href="/users/new">
-        <button>Create User</button>
-      </Link>
-
-      <hr />
-
-      {/* User list */}
-      <ul>
-        {users.map((user : any) => (
-          <li key={user.id}>
-            <Link href={`/users/${user.id}`}>
-              {user.name} ({user.email})
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
 }

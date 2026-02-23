@@ -2,14 +2,10 @@
 
 import Header from "@/components/Header/header"
 import { useSetList } from "@/context/SetListContext"
-import { DoubleArrowLeftIcon } from "@radix-ui/react-icons"
-import classes from './page.module.css'
-import { useRouter } from 'next/navigation'
 import Link from "next/link"
 
 export default function SetListPage() {
   const { setList, removeFromSetList } = useSetList()
-  const router = useRouter()
   return (
 
     <main className="flex min-h-screen flex-col px-5 sm:px-10 py-5 bg-[#e1efff] sm:items-start">
