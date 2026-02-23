@@ -7,11 +7,9 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useSetList } from "@/context/SetListContext";
 
 import {
   TriangleDownIcon
@@ -45,7 +43,7 @@ export function DropdownChordDiagramMenuDialog({ onSelect }: Props) {
             <TriangleDownIcon />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-50 lg:w-44 bg-white border-slate-100" align="end">
+        <DropdownMenuContent className="w-50 lg:w-44 bg-gray-100 border-slate-100" align="end">
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
 
