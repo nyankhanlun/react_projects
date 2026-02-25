@@ -127,7 +127,7 @@ export default function UserClient({ users }: Props) {
 
             <tbody className="divide-y divide-gray-200">
               {users.map((user: any, idx: any) => (
-                <tr key={user.id} className={clsx( user.isUserEnable ? '' : 'bg-gray-300'
+                <tr key={user.id} className={clsx( 'hover:bg-[#e1efff]', user.isUserEnable ? '' : 'bg-gray-300'
 )}>
                   <td className="p-4">
                     {/* <input type="checkbox" className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" /> */}
