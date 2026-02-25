@@ -8,10 +8,9 @@ export type User = {
   country?: string;
   role?: string, 
   plan?: string,
-  stripeCustomerId?: string,
   teamId?: string,
   createdAt?: string,
-  onboardingDone?: boolean
+  isUserEnable?: boolean
 };
 
 export type ChordSheetSection = {

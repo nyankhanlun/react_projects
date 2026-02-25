@@ -9,7 +9,7 @@ async function UsersList() {
 export default function UsersPage() {
 
   return (
-    <Suspense fallback={<p>Fetching songs...</p>} >
+    <Suspense fallback={<p>Fetching users...</p>} >
       <UsersList />
     </Suspense>
   )

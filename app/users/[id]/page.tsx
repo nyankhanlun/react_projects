@@ -21,7 +21,7 @@ export default async function UserDetailPage({ params }: Props) {
   if (!user) notFound();
 
   return (
-    <Suspense fallback={<p>Fetching song detail...</p>} >
+    <Suspense fallback={<p>Fetching user detail...</p>} >
       <UserDetailClient user={user} />
     </Suspense>
 

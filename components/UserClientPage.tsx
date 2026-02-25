@@ -8,6 +8,7 @@ import Link from "next/link";
 import { UseAutoLogout } from "./AutoLogout";
 import Header from "./Header/header";
 import { useSetList } from "@/context/SetListContext";
+import { updateUserEnableStatus, updateUserStatus } from "@/app/actions/users_route";
 
 type Props = {
   users: any
@@ -37,9 +38,42 @@ export default function UserClient({ users }: Props) {
     }
   });
   if (loading) return <p>Loading...</p>;
-  const handleLogout = async () => {
-    await signOut(clientAuth);
-    router.push("/login");
+
+  const disableUser = async (user: any) => {
+    const uid = user.id
+    if (!confirm('Are you sure you want to disable this user?')) return;
+    try {
+      await fetch("/api/disable-user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ uid }),
+      });
+      //   const obj = {
+      //     ...user,
+      //     isUserEnable : false
+
+      //   }
+      // console.log("user ", obj)
+      // setTimeout(async () => {
+      await updateUserStatus(user)
+      // }, 100);
+
+      alert("User disabled");
+    } catch (error: any) {
+      console.log("Error user disable:", error.message);
+    }
+
+  };
+
+  const enableUser = async (user: any) => {
+    const uid = user.id
+    if (!confirm('Are you sure you want to Enable this user?')) return;
+    try {
+      await updateUserEnableStatus(user)
+      alert("User enabled");
+    } catch (error: any) {
+      console.log("Error user disable:", error.message);
+    }
   };
 
   return (
@@ -52,14 +86,14 @@ export default function UserClient({ users }: Props) {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4">
 
           <div className="relative w-full sm:w-auto">
-            {isAdmin && <Link href="/users/new">
+            {/* {isAdmin && <Link href="/signup">
               <button
                 type="button"
                 className="w-full sm:w-auto inline-flex items-center justify-center text-gray-700 bg-gray-100 border border-gray-300 hover:bg-gray-200 hover:text-gray-900 focus:ring-4 focus:ring-gray-200 shadow-sm font-medium rounded-md text-sm px-4 py-2 focus:outline-none"
               >
                 Create User
               </button>
-            </Link>}
+            </Link>} */}
 
 
             <div className="hidden absolute left-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-20">
@@ -94,7 +128,7 @@ export default function UserClient({ users }: Props) {
                 <th className="p-1">No</th>
                 <th className="px-6 py-3">Name</th>
                 <th className="px-6 py-3">Role</th>
-                <th className="px-6 py-3">Remainding Days</th>
+                <th className="px-6 py-3">Plan (Days)</th>
                 <th className="px-6 py-3">Action</th>
               </tr>
             </thead>
@@ -106,7 +140,7 @@ export default function UserClient({ users }: Props) {
                     {/* <input type="checkbox" className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" /> */}
                   </td>
                   <td className="p-1">
-                  <span className="font-medium ">{idx + 1}.</span>
+                    <span className="font-medium ">{idx + 1}.</span>
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3 min-w-[200px]">
@@ -123,11 +157,16 @@ export default function UserClient({ users }: Props) {
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    30
+                    {user?.plan}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <Link href={`/users/${user.id}`} className="font-medium text-blue-600 hover:underline">Detail</Link>
-                    <span className="font-medium text-yellow-600 hover:underline mx-3">Disable</span>
+                    <Link href={`/users/${user.id}/edit`} className="font-medium text-blue-600 hover:underline">Edit</Link>
+                    {user.isUserEnable ?
+                      <span onClick={() => disableUser(user)} className="font-medium text-red-600 hover:underline mx-3">Disable</span>
+                      :
+                      <span onClick={() => enableUser(user)} className="font-medium text-green-300 hover:underline mx-3">Enable</span>
+                    }
+
                   </td>
                 </tr>
               ))}

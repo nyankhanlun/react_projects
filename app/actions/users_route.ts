@@ -1,25 +1,24 @@
 'use server';
 
-
 import { adminDb, adminAuth } from "@/lib/firebase-admin";
 import { clientAuth } from "@/lib/firebase-client";
-// import { adminDb } from './../../util/firebaseConfig'
-import * as admin from 'firebase-admin';
 import { redirect } from 'next/navigation';
-import { deleteDoc } from 'firebase/firestore';
 import { User } from "../types";
 import { createUserWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
-import { cookies } from "next/headers";
 
 
-export async function registerUser(formData: FormData) {
-  const name = String(formData.get("name"));
-  const email = String(formData.get("email"));
-  const password = String(formData.get("password"));
-  const confirm = String(formData.get("confirmpassword"));
+export async function registerUser(prevState: any, formData: FormData) {
+  const name = formData.get("name")?.toString() ?? "";
+  const email = formData.get("email")?.toString() ?? "";
+  const password = formData.get("password")?.toString() ?? "";
+  const confirm = formData.get("confirmpassword")?.toString() ?? "";
+
+  if (password.length < 6) {
+    return { error: "Password must be at least 6 characters." };
+  }
 
   if (password !== confirm) {
-    throw new Error("Passwords do not match");
+    return { error: "Passwords do not match." };
   }
 
   try {
@@ -30,31 +29,36 @@ export async function registerUser(formData: FormData) {
 
     const user: User = {
       id: cred.user.uid,
-      name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      password: formData.get('password') as string,
-      confirmpassword: formData.get('confirmpassword') as string,
-      country: formData.get('country') as string,
+      name: name,
+      email: email,
+      password: password,
+      confirmpassword: confirm,
+      country: '',
       role: 'user',
       plan: 'free',
       teamId: '',
       createdAt: Date.now().toString(),
-      onboardingDone: false,
+      isUserEnable: true,
     };
 
     const collectionRef = adminDb.collection('users');
     await collectionRef.doc(user?.id).set(
       user
     );
-    redirect("/login");
+
   } catch (error: any) {
-    console.error("Error during sign up:", error.message);
+    if (error.code === "auth/email-already-in-use") {
+      return { error: "Email already exists" };
+    }
+
+    if (error.code === "auth/invalid-email") {
+      return { error: "Invalid email address" };
+    }
+
+    return { error: "Something went wrong" };
   }
-
-
+  redirect("/login");
 }
-
-
 
 export async function getUserCollectoin() {
   const collectionRef = adminDb.collection('users');
@@ -77,4 +81,62 @@ export async function userById(user: string): Promise<User | null> {
   return { id: doc.id, ...doc.data() } as User;
 }
 
+export async function editUser(formData: FormData) {
+  const uid = formData.get('id') as string
+  const user: User = {
+    id: uid,
+    name: formData.get('name') as string,
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
+    confirmpassword: formData.get('confirmpassword') as string,
+    country: formData.get('country') as string,
+    role: formData.get('role') as string,
+    plan: formData.get('plan') as string,
+    teamId: formData.get('teamId') as string,
+    createdAt: formData.get('createdAt') as string,
+    isUserEnable: formData.get('isUserEnable') === "true",
+  };
+  try {
+    const docRef = adminDb.collection('users').doc(uid);
+    const payload = {
+      ...user,
+    }
+    await docRef.set(payload, { merge: true });
 
+  } catch (error: any) {
+    console.error("Error during updating user data :", error.message);
+  }
+  redirect("/users");
+}
+
+export async function updateUserStatus(user: any) {
+  try {
+    const docRef = adminDb.collection('users').doc(user.id);
+    const payload = {
+      ...user,
+      isUserEnable: false
+    }
+    await docRef.set(payload, { merge: true });
+
+  } catch (error: any) {
+    console.error("Error during updating user data :", error.message);
+  }
+  redirect("/users");
+}
+
+export async function updateUserEnableStatus(user: any) {
+  try {
+    await adminAuth.updateUser(user.id, {
+      disabled: false,
+    });
+    const docRef = adminDb.collection('users').doc(user.id);
+    const payload = {
+      ...user,
+      isUserEnable: true
+    }
+    await docRef.set(payload, { merge: true });
+  } catch (error: any) {
+    console.error("Error during updating user enable status :", error.message);
+  }
+  redirect("/users");
+}

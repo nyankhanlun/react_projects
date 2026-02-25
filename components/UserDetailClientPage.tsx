@@ -42,12 +42,10 @@ export default function UserDetailClient({ user }: Props) {
       <hr />
 
       <div className='grid grid-cols-2 my-10'>
- {/* Go to edit page if admin access, , otherwise button with Link disappear */}
       <Link href={`/users/${user.id}/edit`}>
         <button>Edit User</button>
       </Link>
 
-      {/* Delete  if admin access, otherwise button disappear*/}
       <form action={deleteUser.bind(null, user.id)}>
         <button style={{ marginTop: 10 }}>Delete User</button>
       </form>
