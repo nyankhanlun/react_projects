@@ -9,6 +9,7 @@ import { UseAutoLogout } from "./AutoLogout";
 import Header from "./Header/header";
 import { useSetList } from "@/context/SetListContext";
 import { updateUserEnableStatus, updateUserStatus } from "@/app/actions/users_route";
+import clsx from "clsx";
 
 type Props = {
   users: any
@@ -48,16 +49,7 @@ export default function UserClient({ users }: Props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ uid }),
       });
-      //   const obj = {
-      //     ...user,
-      //     isUserEnable : false
-
-      //   }
-      // console.log("user ", obj)
-      // setTimeout(async () => {
       await updateUserStatus(user)
-      // }, 100);
-
       alert("User disabled");
     } catch (error: any) {
       console.log("Error user disable:", error.message);
@@ -135,7 +127,8 @@ export default function UserClient({ users }: Props) {
 
             <tbody className="divide-y divide-gray-200">
               {users.map((user: any, idx: any) => (
-                <tr key={user.id} className="hover:bg-gray-50">
+                <tr key={user.id} className={clsx( user.isUserEnable ? '' : 'bg-gray-300'
+)}>
                   <td className="p-4">
                     {/* <input type="checkbox" className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" /> */}
                   </td>
@@ -162,9 +155,9 @@ export default function UserClient({ users }: Props) {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <Link href={`/users/${user.id}/edit`} className="font-medium text-blue-600 hover:underline">Edit</Link>
                     {user.isUserEnable ?
-                      <span onClick={() => disableUser(user)} className="font-medium text-red-600 hover:underline mx-3">Disable</span>
+                      <span onClick={() => disableUser(user)} className="font-medium text-red-300 hover:underline mx-7 cursor-pointer">Disable</span>
                       :
-                      <span onClick={() => enableUser(user)} className="font-medium text-green-300 hover:underline mx-3">Enable</span>
+                      <span onClick={() => enableUser(user)} className="font-semibold text-gray-900 hover:underline mx-7  cursor-pointer">Enable</span>
                     }
 
                   </td>
