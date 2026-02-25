@@ -29,7 +29,7 @@ export function SetListProvider({ children }: { children: ReactNode }) {
       } else {
         setCurrentUserID(user.uid)
         await fetchUserData(user.uid)
-        
+
       }
     });
 
@@ -89,11 +89,12 @@ export function SetListProvider({ children }: { children: ReactNode }) {
   }
 
   const removeFromSetList = async (songId: string) => {
-    if (!currentUserID) return
+    if (!currentUserID) return;
 
-    // Update UI immediately (fast UX)
-    const updated = setList.filter((song) => song.id !== songId)
-    setSetList(updated)
+    const isLastSong = setList.length === 1;
+
+    const updated = setList.filter((song) => song.id !== songId);
+    setSetList(updated);
 
     try {
       await fetch("/api/setlists", {
@@ -103,13 +104,37 @@ export function SetListProvider({ children }: { children: ReactNode }) {
         },
         body: JSON.stringify({
           uid: currentUserID,
-          songId: songId,
+          songId,
+          deleteDoc: isLastSong,
         }),
-      })
+      });
     } catch (error) {
-      console.error("Error removing song:", error)
+      console.error("Error removing song:", error);
     }
-  }
+  };
+
+  // const removeFromSetList = async (songId: string) => {
+  //   if (!currentUserID) return
+
+  //   // Update UI immediately (fast UX)
+  //   const updated = setList.filter((song) => song.id !== songId)
+  //   setSetList(updated)
+
+  //   try {
+  //     await fetch("/api/setlists", {
+  //       method: "DELETE",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         uid: currentUserID,
+  //         songId: songId,
+  //       }),
+  //     })
+  //   } catch (error) {
+  //     console.error("Error removing song:", error)
+  //   }
+  // }
 
   return (
     <SetListContext.Provider value={{ currentUser, currentUserID, setList, addToSetList, removeFromSetList }}>

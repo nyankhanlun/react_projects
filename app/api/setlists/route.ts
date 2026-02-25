@@ -22,9 +22,9 @@ export async function POST(req: Request) {
         { merge: true }
       )
 
-//     await adminDb.collection("setlists").doc(uid).update({
-//   songs: admin.firestore.FieldValue.arrayUnion(song),
-// })
+    //     await adminDb.collection("setlists").doc(uid).update({
+    //   songs: admin.firestore.FieldValue.arrayUnion(song),
+    // })
 
     return NextResponse.json({ success: true })
   } catch (error) {
@@ -69,39 +69,52 @@ export async function GET(req: Request) {
 
 export async function DELETE(req: Request) {
   try {
-    const { uid, songId } = await req.json()
+    const { uid, songId, deleteDoc } = await req.json();
 
-    if (!uid || !songId) {
+    if (!uid) {
       return NextResponse.json(
-        { error: "Missing uid or songId" },
+        { error: "Missing uid" },
         { status: 400 }
-      )
+      );
     }
 
-    const docRef = adminDb.collection("setlists").doc(uid)
-    const docSnap = await docRef.get()
+    const docRef = adminDb.collection("setlists").doc(uid);
 
-    if (!docSnap.exists) {
-      return NextResponse.json({ songs: [] })
+    if (deleteDoc) {
+      // 🔥 Delete whole document
+      await docRef.delete();
+    } else {
+      const docSnap = await docRef.get();
+
+      if (!docSnap.exists) {
+        return NextResponse.json(
+          { error: "Document not found" },
+          { status: 404 }
+        );
+      }
+
+      const currentSongs = docSnap.data()?.songs || [];
+
+      const updatedSongs = currentSongs.filter(
+        (song: any) => song.id !== songId
+      );
+
+      if (updatedSongs.length === 0) {
+        await docRef.delete();
+      } else {
+        await docRef.set(
+          { songs: updatedSongs },
+          { merge: true }
+        );
+      }
     }
 
-    const currentSongs = docSnap.data()?.songs || []
-
-    const updatedSongs = currentSongs.filter(
-      (song: any) => song.id !== songId
-    )
-
-    await docRef.set(
-      { songs: updatedSongs },
-      { merge: true }
-    )
-
-    return NextResponse.json({ success: true })
+    return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Remove error:", error)
+    console.error("Delete error:", error);
     return NextResponse.json(
-      { error: "Server error" },
+      { error: "Failed to update list" },
       { status: 500 }
-    )
+    );
   }
 }
