@@ -113,29 +113,6 @@ export function SetListProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  // const removeFromSetList = async (songId: string) => {
-  //   if (!currentUserID) return
-
-  //   // Update UI immediately (fast UX)
-  //   const updated = setList.filter((song) => song.id !== songId)
-  //   setSetList(updated)
-
-  //   try {
-  //     await fetch("/api/setlists", {
-  //       method: "DELETE",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         uid: currentUserID,
-  //         songId: songId,
-  //       }),
-  //     })
-  //   } catch (error) {
-  //     console.error("Error removing song:", error)
-  //   }
-  // }
-
   return (
     <SetListContext.Provider value={{ currentUser, currentUserID, setList, addToSetList, removeFromSetList }}>
       {children}
